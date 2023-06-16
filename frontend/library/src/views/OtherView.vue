@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3>This is an other page</h3>
-  </div>
-</template>
-
+    <main>  
+      <h1>OtherView.vue</h1>
+  
+    </main>
+  </template>

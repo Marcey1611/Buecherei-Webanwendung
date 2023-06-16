@@ -1,8 +1,12 @@
 <template>
-  <div class="item">
-    <h3>BookifvhrwioTestTeest
-      
-    </h3>
+  <h1>Book.vue</h1>
+  <div>
+    
   </div>
 </template>
 
+<script>
+export default {
+  props: ['book']
+};
+</script>
