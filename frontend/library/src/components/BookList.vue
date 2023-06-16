@@ -3,7 +3,7 @@
     <h1>BookList.vue</h1>
 
     <div class="Books" v-for="book in books" :key="book.isbn">
-      <Book :book="book" />
+      <Book :book="book"/>
     </div>
   </div>
 </template>
@@ -18,6 +18,7 @@ export default {
   },
   data: function() {
     return {
+      anzeigen: false,
       books: []
     };
   },

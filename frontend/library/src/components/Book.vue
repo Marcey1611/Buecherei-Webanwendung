@@ -3,6 +3,7 @@
     <h2 id="BookTitle">{{ book.title }}</h2>
     <h3 id="BookAuthor">{{ book.author }}</h3>
     <h3 id="BookReleaseYear">{{ book.releaseYear }}</h3>
+    <img :src="book.img" alt="">
   </div>
 </template>
 
