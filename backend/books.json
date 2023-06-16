@@ -1,6 +1,7 @@
 [
     {
-        "isbn": "9783423716512",
+        
+        "isbn": 9783423716512,
         "title": "Throne of Glass - Die Erwählte",
         "author": "Sarah J. Maas",
         "releaseYear": 2015,
@@ -11,7 +12,7 @@
         "description": "Celaena ist siebzehn und schon jetzt die gefürchtetste Assassinin - also Auftragskillerin - Adarlans. Mit jeder Menge Mut, Köpfchen und Härte schlägt sie sich durch die raue Welt des umkämpften Erileas. Was sie allerdings nicht davon abhält, sich auch ausgiebig für schöne Kleider, Süßigkeiten und natürlich Männer zu interessieren. In der Regel geht sie gut gelaunt und immer mit einem treffenden Spruch auf den Lippen durchs Leben. Nur über ihre Vergangenheit spricht sie nicht gerne ..."
     },
     {
-        "isbn": "9780590353403",
+        "isbn": 9780590353403,
         "title": "Harry Potter and the Sorcerer's Stone",
         "author": "J.K. Rowling",
         "releaseYear": 1997,

@@ -13,3 +13,13 @@ function log(req, res, next) {
     next();
 }
 app.use(log);
+
+app.get("/books", function (req, res) {
+    fs.readFile(filename, "utf8", function (err, data) {
+        res.writeHead(200, {
+            "Content-Type": "application/json",
+        });
+        res.end(data);
+    });
+});
+app.listen(port, () => console.log(`Server listening on port ${port}!`));

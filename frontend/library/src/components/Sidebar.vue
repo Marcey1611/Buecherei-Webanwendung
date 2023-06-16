@@ -5,6 +5,8 @@
     <nav>
         <RouterLink to="/">Home</RouterLink>
         <br>
+        <RouterLink to="/books">Books</RouterLink>
+        <br>
         <RouterLink to="/otherside">Other</RouterLink>
       </nav>
 </aside>

@@ -7,17 +7,9 @@
 </template>
 
 <script>
-import BookList from '../components/BookList.vue';
 
-export default {
-  components: {
-    BookList
-  }
-};
 </script>
 
 <style>
-  #HomeView{
-    background-color: blueviolet;
-  }
+
 </style>
