@@ -8,9 +8,9 @@
     <h3 id="BookReleaseYear">Erscheinungsjahr: {{ book.releaseYear }}</h3>
     <h3 id="BookSumTitle">Zusammenfassung: </h3>
     <div id="BookSummary">{{ book.description }}</div>
-    <div id="BookStatusSpace">
+    <!--<div id="BookStatusSpace">
       <h2 id="BookStatus">Verfügbar</h2>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -26,11 +26,11 @@ export default {
     grid-template-columns: 20vw 50vw;
     grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh 5vh;
     width: 70vw;
-    height: 35vh;
+    height: 30vh;
     padding-bottom: 1vh;
     margin-left: 3vw;
     justify-content: left;
-    border-bottom: black 1px solid;
+    /*border-bottom: black 1px solid;*/
 
   }
 
@@ -50,7 +50,7 @@ export default {
     margin-left: 1vw;
   }
 
-  #BookStatusSpace{
+  /*#BookStatusSpace{
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 7;
@@ -65,7 +65,7 @@ export default {
     margin-top: 1vh; 
     margin-left: 1vw;
     text-align: center;
-  }
+  }*/
 
   #BookTitle{
     grid-column-start:2;

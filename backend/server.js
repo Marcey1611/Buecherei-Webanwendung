@@ -22,4 +22,20 @@ app.get("/books", function (req, res) {
         res.end(data);
     });
 });
+app.put("/books/:id", function (req, res) {
+    fs.readFile(filename, "utf8", function (err, data) {
+        let dataAsObject = JSON.parse(data);
+        console.log(dataAsObject[0]);
+        console.log(dataAsObject[req.params.id]);
+        dataAsObject[req.params.id].firstName = req.body.firstName;
+        dataAsObject[req.params.id].lastName = req.body.lastName;
+        dataAsObject[req.params.id].available = req.body.available;
+        fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
+            res.writeHead(200, {
+                "Content-Type": "application/json",
+            });
+            res.end(JSON.stringify(dataAsObject));
+        });
+    });
+});
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
