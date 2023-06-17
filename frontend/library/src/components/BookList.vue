@@ -1,7 +1,10 @@
 <template>
-  <div id="BookList">  
+  <div id="BookList">
+    <div id="SearchBar">
+      <input @input="handleInput()" v-model="searchInput" id="SearchField">
+    </div>
     <div class="Books" v-for="book in books" :key="id">
-      <Book :book="book"/>
+      <Book :book="book" />
       <div id="borrow">
         <input v-if="book.available" type="text" placeholder="First name" v-model="book.firstName">
         <input v-if="book.available" type="text" placeholder="Last name" v-model="book.lastName">
@@ -23,7 +26,8 @@ export default {
   data: function() {
     return {
       anzeigen: false,
-      books: []
+      books: [],
+      searchInput: '',
     };
   },
   methods: {
@@ -50,7 +54,17 @@ export default {
         .then(response => {
           this.books = response.data;
         });
-    }
+    },
+      async handleInput(event) {
+      try {
+        const response = await axios.get('http://localhost:8080/books/search/', {
+          params: { searchText:this.searchInput }
+        });
+        this.books = response.data;
+      } catch (error) {
+        console.error(error);
+      }    }
+
   },
   mounted() {
     axios.get("http://localhost:8080/books/").then(response => {
@@ -81,5 +95,10 @@ export default {
     justify-content: left;
     border-bottom: black 1px solid;
   }
-
+  #SearchBar{
+    background-color: grey;
+  }
+  #SearchField{
+    background-color: aqua;
+  }
 </style>
