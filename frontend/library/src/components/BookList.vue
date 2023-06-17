@@ -5,8 +5,8 @@
       <div id="borrow">
         <input v-if="book.available" type="text" placeholder="First name" v-model="book.firstName">
         <input v-if="book.available" type="text" placeholder="Last name" v-model="book.lastName">
-        <button v-if="book.available" @click="borrow(book)">Borrow</button>
-        <button v-if="!book.available" @click="handback(book)">Hand back</button>
+        <v-btn v-if="book.available" @click="borrow(book)">Borrow</v-btn>
+        <v-btn v-if="!book.available" @click="handback(book)">Hand back</v-btn>
       </div>
     </div>
   </div>

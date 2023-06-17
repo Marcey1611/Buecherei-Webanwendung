@@ -11,7 +11,7 @@
       <input v-model="cover" id="AddCover" type="text" placeholder="Cover URL">
       <input v-model="description" id="AddDescription" type="text" placeholder="Beschreibung/Zusammenfassung">
       
-      <button @click="addBook">Buch hinzufügen</button>
+      <v-btn @click="addBook">Buch hinzufügen</v-btn>
     </div>
   </template>
   

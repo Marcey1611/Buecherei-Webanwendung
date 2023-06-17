@@ -11,9 +11,11 @@
     "axios": "^1.4.0",
     "material-components-web": "^14.0.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.2"
+    "vue-router": "^4.2.2",
+    "vuetify": "^3.0.1"
   },
   "devDependencies": {
+    "@mdi/font": "^7.2.96",
     "@vitejs/plugin-vue": "^4.2.3",
     "vite": "^4.3.9"
   }

@@ -1,5 +1,5 @@
 <template>
-    <main id="HomeView">  
+    <main>  
       <BookList />
     </main>
   </template>
@@ -15,7 +15,5 @@
   </script>
   
   <style>
-    #HomeView{
-      background-color: blueviolet;
-    }
+
   </style>
