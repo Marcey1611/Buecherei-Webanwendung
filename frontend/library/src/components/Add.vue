@@ -1,18 +1,18 @@
 <template>
     <h1 id="AddH1">Add a new book to our libraray</h1>
-    <div id="Add">  
-      <input v-model="isbn" id="AddISBN" type="text" placeholder="ISBN">
-      <input v-model="title" id="AddTitle" type="text" placeholder="Titel">
-      <input v-model="author" id="AddAuthor" type="text" placeholder="Autor">
-      <input v-model="releaseYear" id="AddReleaseYear" type="text" placeholder="Veröffentlichungsjahr">
-      <input v-model="genre" id="AddGenre" type="text" placeholder="Genre">
-      <input v-model="language" id="AddLanguage" type="text" placeholder="Sprache">
-      <input v-model="pages" id="AddPAges" type="text" placeholder="Seitenanzahl">
-      <input v-model="cover" id="AddCover" type="text" placeholder="Cover URL">
-      <input v-model="description" id="AddDescription" type="text" placeholder="Beschreibung/Zusammenfassung">
+    <v-form id="Add">  
+      <v-text-field v-model="isbn" id="AddISBN" type="text" placeholder="ISBN"></v-text-field>
+      <v-text-field v-model="title" id="AddTitle" type="text" placeholder="Titel"></v-text-field>
+      <v-text-field v-model="author" id="AddAuthor" type="text" placeholder="Autor"></v-text-field>
+      <v-text-field v-model="releaseYear" id="AddReleaseYear" type="text" placeholder="Veröffentlichungsjahr"></v-text-field>
+      <v-text-field v-model="genre" id="AddGenre" type="text" placeholder="Genre"></v-text-field>
+      <v-text-field v-model="language" id="AddLanguage" type="text" placeholder="Sprache"></v-text-field>
+      <v-text-field v-model="pages" id="AddPAges" type="text" placeholder="Seitenanzahl"></v-text-field>
+      <v-text-field v-model="cover" id="AddCover" type="text" placeholder="Cover URL"></v-text-field>
+      <v-text-field v-model="description" id="AddDescription" type="text" placeholder="Beschreibung/Zusammenfassung"></v-text-field>
       
       <v-btn @click="addBook">Buch hinzufügen</v-btn>
-    </div>
+      </v-form>
   </template>
   
   <script>
