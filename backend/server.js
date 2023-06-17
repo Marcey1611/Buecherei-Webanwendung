@@ -22,6 +22,25 @@ app.get("/books", function (req, res) {
         res.end(data);
     });
 });
+app.get('/books/search/', (req, res) => {
+    const searchText = req.query.searchText;
+    console.log(searchText)
+    const data = require('./books.json'),
+        tmp = []
+    for (const item of data) {
+        tmpTitel = item.title;
+        tmpAuthor = item.author;
+
+        if (tmpTitel.includes(searchText)) {
+            tmp.push(item)
+        } else {
+            if (tmpAuthor.includes(searchText)) {
+                tmp.push(item)
+            }
+        }
+    }
+    res.json(tmp)
+});
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
@@ -36,7 +55,7 @@ app.put("/books/:id", function (req, res) {
         });
     });
 });
-app.post("/books", function(req,res) {
+app.post("/books", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
         dataAsObject.push({

@@ -35,16 +35,19 @@ export default {
           return true
         }
       })
-    }
-
-  },
-    mounted() {
+    },
+    getImgUrl(event){
       try {
         this.resImgURL = 'https://covers.openlibrary.org/b/isbn/' + this.book.isbn + '-L.jpg'
          if (this.checkImage(this.resImgURL)) {
          }
     } catch {
     }
+    }
+
+  },
+    mounted() {
+      document.addEventListener('resize',this.getImgUrl())
   }
 
 };
