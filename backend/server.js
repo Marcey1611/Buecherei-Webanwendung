@@ -38,4 +38,30 @@ app.put("/books/:id", function (req, res) {
         });
     });
 });
+app.post("/books", function(req,res) {
+    fs.readFile(filename, "utf8", function (err, data) {
+        let dataAsObject = JSON.parse(data);
+        dataAsObject.push({
+            id: dataAsObject.length,
+            img: req.body.cover,
+            isbn: req.body.isbn,
+            title: req.body.title,
+            author: req.body.author,
+            releaseYear: req.body.releaseYear,
+            genre: req.body.genre,
+            language: req.body.language,
+            pages: req.body.pages,
+            available: true,
+            description: req.body.description,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
+        });
+        fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
+            res.writeHead(200, {
+                "Content-Type": "application/json",
+            });
+            res.end(JSON.stringify(dataAsObject));
+        });
+    });
+})
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

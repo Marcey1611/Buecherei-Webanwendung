@@ -7,7 +7,7 @@
 </template>
 
 <script>
-
+import BookList from '../components/BookList.vue';
 </script>
 
 <style>
