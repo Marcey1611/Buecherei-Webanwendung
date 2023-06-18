@@ -1,0 +1,17 @@
+Home:
+    Zuletzt ausgeliehen Bücher
+    Top-10
+    Higlight 
+    überganng
+    SIdebar einklappen lassen
+Books:
+    Bilder holen und an das backend schicken
+    Suche Groß und klein schreibung (erledigt)
+    zusammenfassung raussuchen lassen
+    Filter
+Add New Book:
+    Book schauen ob schon vorhanden
+    ISBN raussuchen lassen
+    remove Book
+Gesammt:
+    Kommentare

@@ -26,15 +26,15 @@ app.get("/books", function (req, res) {
     });
 });
 app.get('/books/search/', (req, res) => {
-    const searchText = req.query.searchText;
+    const searchText = req.query.searchText.toLowerCase();
     console.log(searchText)
     const readFile = promisify(fs.readFile)
     readFile(filename,"utf8").then((data)=>{
         const books = JSON.parse(data);
         const tmp = [];
         for (const item of books) {
-            tmpTitel = item.title;
-            tmpAuthor = item.author;
+            let tmpTitel = item.title.toLowerCase();
+            let tmpAuthor = item.author.toLowerCase();
     
             if (tmpTitel.includes(searchText)) {
                 tmp.push(item)
