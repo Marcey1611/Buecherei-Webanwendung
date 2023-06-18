@@ -5,7 +5,7 @@ Home:
     überganng
     SIdebar einklappen lassen
 Books:
-    Bilder holen und an das backend schicken
+   
     Suche Groß und klein schreibung (erledigt)
     zusammenfassung raussuchen lassen
     Filter
