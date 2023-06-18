@@ -25,12 +25,12 @@ app.get("/books", function (req, res) {
         res.end(data);
     });
 });
-app.get('/books/search/', (req, res) => {
+app.get('/books/search', (req, res) => {
     const searchText = req.query.searchText.toLowerCase();
     console.log(req.query);
     const languages=req.query.languages;
-    
-    console.log(languages);
+    const minPages=req.query.pages[0];
+    const maxPages=req.query.pages[1];    
     const readFile = promisify(fs.readFile)
     readFile(filename, "utf8").then((data) => {
         const books = JSON.parse(data);
@@ -40,18 +40,34 @@ app.get('/books/search/', (req, res) => {
             let tmpAuthor = item.author.toLowerCase();
 
             if (tmpTitel.includes(searchText)) {
-                for (const itemLang of languages) {
-                    if (item.language == itemLang) {
-                        tmp.push(item)
-                    }
-                }
-            } else {
-                if (tmpAuthor.includes(searchText)) {
+                if(languages!=null){
                     for (const itemLang of languages) {
                         if (item.language == itemLang) {
-                            tmp.push(item)
+                            if(item.pages<=maxPages && item.pages>=minPages){
+                                tmp.push(item)
+
+                            }
                         }
                     }
+                }else{
+                    tmp.push(item)
+                }
+                
+            } else {
+                if (tmpAuthor.includes(searchText)) {
+                    if(languages[0]!=null){
+                        for (const itemLang of languages) {
+                            if (item.language == itemLang) {
+                                if(item.pages<=maxPages && item.pages>=minPages){
+                                    tmp.push(item)
+                                }
+                                
+                            }
+                        }
+                    }else{
+                        tmp.push(item)
+                    }
+                    
                 }
             }
         };

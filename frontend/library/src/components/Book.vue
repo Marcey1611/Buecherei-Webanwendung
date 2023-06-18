@@ -3,7 +3,7 @@
     <div id="BookCoverspace">
       <img id="BookCover" :src="book.img" alt="" style="max-width: 100%;max-height: 100%;">
     </div>
-    <h2 id="BookTitle">Title: {{ book.title }}</h2>
+    <h2 id="BookTitle">Title: {{ book.title }}   {{ book.pages }}</h2>
     <h3 id="BookAuthor">Autor: {{ book.author }}</h3>
     <h3 id="BookReleaseYear">Erscheinungsjahr: {{ book.releaseYear }}</h3>
     <h3 id="BookSumTitle">Zusammenfassung: </h3>

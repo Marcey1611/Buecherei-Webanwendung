@@ -1,13 +1,18 @@
 <template>
   <div id="BookList">
     <div id="SearchFilterBar">
-      <v-text-field id="SearchField" @input="handleInput()" v-model="searchInput" placeholder="Search"></v-text-field>
-      <h2 id="filterH3">Filter</h2>
-      <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show" id="filterChevronButton"></v-btn>
-      <div v-show="show" id="filterBar">
+      <div id="SearchField"><v-text-field id="searchFieldField" @clear="handleInput" @input="handleInput" v-model="searchInput" placeholder="Search" clearable prepend-icon="mdi-magnify"></v-text-field></div>
+       <div id="filterChevronButton"><v-icon :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show" ></v-icon></div>
+       <br>
+       <div v-show="show" id="filterBar">
         <div id="filterLanguages"><v-select @blur="handleInput" clearable chips label="Language"
-            v-model="selectedLanguages" :items="languages" multiple></v-select></div>
+            v-model="selectedLanguages" :items="languages" multiple></v-select>
         </div>
+        
+        <div id="filterPages">
+          <v-range-slider @click="handleInput" max="2000" label="Pages" color="#616161" track-fill-color="#0E639C" thumb-color="#0E639C" v-model="filterPagesValue" step="1" thumb-label="always"></v-range-slider>
+        </div>
+      </div>
     </div>
     <div class="Books" v-for="book in books" :key="id">
       <Book :book="book" />
@@ -33,6 +38,7 @@ export default {
   },
   data: function () {
     return {
+      filterPagesValue: [0,2000],
       show: false,
       languages: ['English', 'German', 'French', 'Italian'],
       selectedLanguages: [],
@@ -51,7 +57,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          this.getImgUrl();
+          this.getGoogleImg();
         });
     },
     handback: function (book) {
@@ -64,17 +70,18 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          this.getImgUrl();
+          this.getGoogleImg();
         });
     },
     async handleInput() {
       try {
-        const response = await axios.get('http://localhost:8080/books/search/', {
+        const response = await axios.get('http://localhost:8080/books/search', {
           params: { searchText: this.searchInput,
-                    languages: this.selectedLanguages }
+                    languages: this.selectedLanguages,
+                    pages: this.filterPagesValue }
         });
         this.books = response.data;
-        this.getImgUrl();
+        this.getGoogleImg();
       } catch (error) {
         console.error(error);
       }
@@ -114,8 +121,8 @@ export default {
 #BookList {}
 
 .Books {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
 
 }
 
@@ -155,7 +162,6 @@ export default {
 #SearchFilterBar {
   padding-top: 1vh;
   padding-left: 1vw;
-  margin-right: 50vw;
   background-color: #2d2d2d;
   width: 82vw;
   display: grid;
@@ -165,25 +171,22 @@ export default {
 }
 
 #SearchField {
-  width: max-content;
+  width: 75vw;
   padding-left: 1vw;
+  color: #a6a6a6;
+
+}
+#searchFieldField{
   background-color: #3c3c3c;
-  color: #a6a6a6;
-
 }
-
-#filterH3 {
-  padding-top: 0.6vw;
-  padding-left: 5vw;
-  color: #a6a6a6;
-  text-align: center;
-}
-
 #filterChevronButton {
-  margin-top: 1vh;
+  margin-left: 1vw;
+  padding-top: 1vh;
+  font-size: 3vh;
   height: 4vh;
   width: 4vh;
   text-align: center;
+  color: #616161;
 }
 
 #filterBar {
@@ -194,5 +197,10 @@ export default {
   background-color: #616161;
   color: white;
   height: 6vh;
-  width: 30vw;}
+  width: 30vw;
+}
+#filterPages{
+  color: white;
+  margin-top: 3vh;
+}
 </style>
