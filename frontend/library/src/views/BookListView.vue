@@ -1,6 +1,6 @@
 <template>
-    <main>  
-      <BookList />
+    <main> 
+      <BookList/>
     </main>
   </template>
   
@@ -15,5 +15,6 @@
   </script>
   
   <style>
+  
 
   </style>

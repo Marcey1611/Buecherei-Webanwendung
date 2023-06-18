@@ -1,7 +1,7 @@
 <template>
   <div id="BookList">
     <div id="SearchBar">
-      <input @input="handleInput()" v-model="searchInput" id="SearchField">
+      <v-text-field @input="handleInput()" v-model="searchInput" id="SearchField"></v-text-field>
     </div>
     <div class="Books" v-for="book in books" :key="id">
       <Book :book="book" />
@@ -55,20 +55,27 @@ export default {
           this.books = response.data;
         });
     },
-      async handleInput(event) {
+      async handleInput() {
       try {
         const response = await axios.get('http://localhost:8080/books/search/', {
           params: { searchText:this.searchInput }
         });
         this.books = response.data;
+        this.getImgUrl();
       } catch (error) {
         console.error(error);
-      }    }
+      }    },
+    getImgUrl(){
+      for (let i = 0; i < this.books.length; i++){
+        this.books[i].img='https://covers.openlibrary.org/b/isbn/' + this.books[i].isbn + '-L.jpg'
+      }
+    }
 
   },
   mounted() {
     axios.get("http://localhost:8080/books/").then(response => {
       this.books = response.data;
+      this.getImgUrl()
     });
   }
 };
@@ -97,8 +104,12 @@ export default {
   }
   #SearchBar{
     background-color: grey;
+    margin-right: 50vw;
+
   }
   #SearchField{
     background-color: aqua;
+    width: 50vw;
+    
   }
 </style>

@@ -1,6 +1,9 @@
 <template>
-  <div id="app">  
-        <Sidebar id="Sidebar"></Sidebar>
+  <div id="app">
+    <div id="Sidebar">
+      <Sidebar></Sidebar>
+    </div>
+    
     <div id="main-content">
       <router-view />
     </div>
@@ -34,7 +37,7 @@ export default {
   }
   #main-content {
     margin-left: 200px;
-    
+    width: 100vw;
   }
   
 

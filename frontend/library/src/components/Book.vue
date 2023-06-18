@@ -1,23 +1,20 @@
 <template>
   <div id="Book">
     <div id="BookCoverspace">
-      <img id="BookCover" :src=resImgURL alt="" style="max-width: 100%;max-height: 100%;">
+      <img id="BookCover" :src="book.img" alt="" style="max-width: 100%;max-height: 100%;">
     </div>
     <h2 id="BookTitle">Title: {{ book.title }}</h2>
     <h3 id="BookAuthor">Autor: {{ book.author }}</h3>
     <h3 id="BookReleaseYear">Erscheinungsjahr: {{ book.releaseYear }}</h3>
     <h3 id="BookSumTitle">Zusammenfassung: </h3>
     <div id="BookSummary">{{ book.description }}</div>
-    <!--<div id="BookStatusSpace">
-      <h2 id="BookStatus">Verfügbar</h2>
-    </div>-->
   </div>
 </template>
 
 <script>
 export default {
   props: ['book'],
-  data() {
+  /*data() {
     return {
       resImgURL: ''
     }
@@ -37,18 +34,19 @@ export default {
       })
     },
     getImgUrl(event){
-      try {
+      //this.book.img='https://covers.openlibrary.org/b/isbn/' + this.book.isbn + '-L.jpg'
+      /* try {
         this.resImgURL = 'https://covers.openlibrary.org/b/isbn/' + this.book.isbn + '-L.jpg'
-         if (this.checkImage(this.resImgURL)) {
-         }
-    } catch {
-    }
+        if (this.checkImage(this.resImgURL)) {
+        }
+      } catch {
+      } 
     }
 
   },
     mounted() {
       document.addEventListener('resize',this.getImgUrl())
-  }
+  } */
 
 };
 </script>
