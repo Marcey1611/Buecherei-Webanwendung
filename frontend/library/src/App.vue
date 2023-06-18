@@ -22,14 +22,10 @@ export default {
 
 <style>
   #app{
-    
     height: 100vh;
-    
   }
   #sidebar{
     z-index: 1;
-
-
   }
   #main-content {
     z-index: 0;

@@ -3,13 +3,15 @@
   <v-card>
     <v-layout>
       <v-navigation-drawer
+        id="navigation-drawer"
         v-model="drawer"
         :rail="rail"
         permanent
       >
         <v-list-item
-          title="The OnLibrary"
-          nav
+            class="text"
+            title="The OnLibrary"
+            nav
         >
           <template v-slot:append>
             <v-btn
@@ -31,18 +33,21 @@
 
         <v-list density="compact" nav>
             <v-list-item 
+                class="text"
                 prepend-icon="mdi-home-city" 
                 title="Home" 
                 value="home"
                 to="/"
             />  
             <v-list-item 
+                class="text"
                 prepend-icon="mdi-account" 
                 title="My Account" 
                 value="account"
                 to="/books"
             />
             <v-list-item 
+                class="text"
                 prepend-icon="mdi-account-group-outline" 
                 title="Users" 
                 value="users"
@@ -70,4 +75,11 @@
 </script>
 
 <style>
+    #navigation-drawer{
+        background-color: #3c3c3c;
+    }
+    
+    .text{
+        color: #a6a6a6; 
+    }
 </style>
