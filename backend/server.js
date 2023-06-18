@@ -4,6 +4,9 @@ const fs = require("fs");
 const cors = require("cors");
 const port = 8080;
 const filename = __dirname + "/books.json";
+const { promisify } = require('util');
+const { readFile } = require("fs/promises");
+const { error } = require("console");
 
 //Middleware
 app.use(express.json());
@@ -25,21 +28,28 @@ app.get("/books", function (req, res) {
 app.get('/books/search/', (req, res) => {
     const searchText = req.query.searchText;
     console.log(searchText)
-    const data = require('./books.json'),
-        tmp = []
-    for (const item of data) {
-        tmpTitel = item.title;
-        tmpAuthor = item.author;
-
-        if (tmpTitel.includes(searchText)) {
-            tmp.push(item)
-        } else {
-            if (tmpAuthor.includes(searchText)) {
+    const readFile = promisify(fs.readFile)
+    readFile(filename,"utf8").then((data)=>{
+        const books = JSON.parse(data);
+        const tmp = [];
+        for (const item of books) {
+            tmpTitel = item.title;
+            tmpAuthor = item.author;
+    
+            if (tmpTitel.includes(searchText)) {
                 tmp.push(item)
+            } else {
+                if (tmpAuthor.includes(searchText)) {
+                    tmp.push(item)
+                }
             }
         }
-    }
-    res.json(tmp)
+        res.json(tmp)
+    }).catch((error)=>
+    console.log(error)
+    )
+        
+   
 });
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
