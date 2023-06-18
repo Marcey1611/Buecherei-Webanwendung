@@ -41,15 +41,15 @@
             />  
             <v-list-item 
                 class="text"
-                prepend-icon="mdi-account" 
-                title="My Account" 
+                prepend-icon="mdi-book" 
+                title="Books" 
                 value="account"
                 to="/books"
             />
             <v-list-item 
                 class="text"
-                prepend-icon="mdi-account-group-outline" 
-                title="Users" 
+                prepend-icon="mdi-plus" 
+                title="Add book" 
                 value="users"
                 to="/add"
             />
@@ -77,6 +77,7 @@
 <style>
     #navigation-drawer{
         background-color: #3c3c3c;
+        color: #a6a6a6;
     }
     
     .text{

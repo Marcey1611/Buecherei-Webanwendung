@@ -27,29 +27,40 @@ app.get("/books", function (req, res) {
 });
 app.get('/books/search/', (req, res) => {
     const searchText = req.query.searchText.toLowerCase();
-    console.log(searchText)
+    console.log(req.query);
+    const languages=req.query.languages;
+    
+    console.log(languages);
     const readFile = promisify(fs.readFile)
-    readFile(filename,"utf8").then((data)=>{
+    readFile(filename, "utf8").then((data) => {
         const books = JSON.parse(data);
         const tmp = [];
         for (const item of books) {
             let tmpTitel = item.title.toLowerCase();
             let tmpAuthor = item.author.toLowerCase();
-    
+
             if (tmpTitel.includes(searchText)) {
-                tmp.push(item)
+                for (const itemLang of languages) {
+                    if (item.language == itemLang) {
+                        tmp.push(item)
+                    }
+                }
             } else {
                 if (tmpAuthor.includes(searchText)) {
-                    tmp.push(item)
+                    for (const itemLang of languages) {
+                        if (item.language == itemLang) {
+                            tmp.push(item)
+                        }
+                    }
                 }
             }
-        }
+        };
         res.json(tmp)
-    }).catch((error)=>
-    console.log(error)
+    }).catch((error) =>
+        console.log(error)
     )
-        
-   
+
+
 });
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
