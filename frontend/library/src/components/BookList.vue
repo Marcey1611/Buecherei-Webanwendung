@@ -78,12 +78,9 @@ export default {
             key: 'AIzaSyA8Dvs5T5N5GphcuRKPx2ilCcRJWSIvU1A'
           }
         }).then(response => {
-          console.log(element.isbn)
-          console.log(response)
           try {
             imgresp = response.data.items[0].volumeInfo.imageLinks.thumbnail
             element.img = imgresp
-            console.log(imgresp)
           } catch {
             console.log('Error')
           }

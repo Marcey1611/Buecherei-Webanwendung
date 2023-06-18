@@ -9,9 +9,13 @@ Books:
     Suche Groß und klein schreibung (erledigt)
     zusammenfassung raussuchen lassen
     Filter
+    (maybe)autofullfill search
 Add New Book:
     Book schauen ob schon vorhanden
     ISBN raussuchen lassen
     remove Book
+
+Backend:
+    kategorien(Frontend Add Anpassen)
 Gesammt:
     Kommentare
