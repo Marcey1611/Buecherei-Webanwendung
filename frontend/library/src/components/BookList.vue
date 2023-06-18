@@ -1,15 +1,16 @@
 <template>
   <div id="BookList">
-    <div id="SearchBar">
-      <v-text-field @input="handleInput()" v-model="searchInput" id="SearchField"></v-text-field>
+    <div id="SearchFilterBar">
+      <v-text-field id="SearchField" @input="handleInput()" v-model="searchInput"  placeholder="Search"></v-text-field>
+      <p>eiqhnogijewiogaekgmnqeogmnoe</p>
     </div>
     <div class="Books" v-for="book in books" :key="id">
       <Book :book="book" />
       <div id="borrow">
-        <input v-if="book.available" type="text" placeholder="First name" v-model="book.firstName">
-        <input v-if="book.available" type="text" placeholder="Last name" v-model="book.lastName">
-        <v-btn v-if="book.available" @click="borrow(book)">Borrow</v-btn>
-        <v-btn v-if="!book.available" @click="handback(book)">Hand back</v-btn>
+        <v-text-field class="BookListBorrowInput" v-if="book.available" type="text" placeholder="First name" v-model="book.firstName" ></v-text-field>
+        <v-text-field class="BookListBorrowInput" v-if="book.available" type="text" placeholder="Last name" v-model="book.lastName"></v-text-field>
+        <v-btn id="BookListBorrowButton" v-if="book.available" @click="borrow(book)" >Borrow</v-btn>
+        <v-btn id="BookListHandBackButton" v-if="!book.available" @click="handback(book)">Hand back</v-btn>
       </div>
     </div>
   </div>
@@ -41,6 +42,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
+          this.getImgUrl();
         });
     },
     handback: function(book) {
@@ -53,6 +55,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
+          this.getImgUrl();
         });
     },
       async handleInput() {
@@ -83,8 +86,6 @@ export default {
 
 <style>
   #BookList{
-    background-color: bisque;
-    white-space: pre;
   }
   .Books{
     margin-top: 20px;
@@ -92,24 +93,51 @@ export default {
 
   }
   #borrow{
+    background-color: #2d2d2d;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 70vw;
-    height: 5vh;
+    width: 82vw;
+    height: 11vh;
+    padding-top: 3vh;
     padding-bottom: 1vh;
-    margin-left: 3vw;
     padding-left: 1vw;
+    padding-right: 1vw;
     justify-content: left;
-    border-bottom: black 1px solid;
+    border-bottom: #616161 1px solid;
   }
-  #SearchBar{
-    background-color: grey;
+  .BookListBorrowInput{
+    margin-right: 1vw;
+    height: 6vh; 
+    color: #a6a6a6;
+    background-color: #3c3c3c;
+  }
+  #BookListBorrowButton{
+    height: 6vh;
+    background-color: #0E639C;
+    color: white;
+  }
+  #BookListHandBackButton{
+    height: 6vh;
+    background-color: #0E639C;
+    color: white;
+  }
+  #SearchFilterBar{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vw;
     margin-right: 50vw;
+    background-color: #2d2d2d;
+    width: 82vw;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr ;
+    
 
   }
   #SearchField{
-    background-color: aqua;
-    width: 50vw;
+    width: max-content;
+    padding-left: 1vw;
+    background-color: #3c3c3c;
+    color: #a6a6a6;
     
   }
 </style>
