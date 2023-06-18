@@ -17,14 +17,6 @@ export default {
             isbn: '',
             title: '',
             author: '',
-            releaseYear: '',
-            genre: '',
-            language: '',
-            pages: '',
-            description: '',
-            cover: '',
-            firstName: '',
-            lastName: '',
             tmpImgurl: ''
         };
     },

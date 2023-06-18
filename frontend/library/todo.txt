@@ -1,20 +1,18 @@
 Home:
     Zuletzt ausgeliehen Bücher
     Top-10
-    Higlight 
+    Higlight (highlight)
     überganng
-    SIdebar einklappen lassen
+    Sidebar einklappen lassen (erledigt)
 Books:
-   
     Suche Groß und klein schreibung (erledigt)
-    zusammenfassung raussuchen lassen
+    zusammenfassung raussuchen lassen (erledigt)
     Filter
     (maybe)autofullfill search
 Add New Book:
     Book schauen ob schon vorhanden
-    ISBN raussuchen lassen
+    ISBN raussuchen lassen(erledigt)
     remove Book
-
 Backend:
     kategorien(Frontend Add Anpassen)
 Gesammt:

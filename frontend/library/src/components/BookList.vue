@@ -51,7 +51,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          this.getImgUrl();
+          this.getGoogleImg();
         });
     },
     handback: function (book) {
@@ -64,7 +64,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          this.getImgUrl();
+          this.getGoogleImg();
         });
     },
     async handleInput() {
@@ -74,7 +74,7 @@ export default {
                     languages: this.selectedLanguages }
         });
         this.books = response.data;
-        this.getImgUrl();
+        this.getGoogleImg();
       } catch (error) {
         console.error(error);
       }
