@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div id="Sidebar">
-      <Sidebar></Sidebar>
+    <div>
+      <Sidebar id="sidebar"></Sidebar>
     </div>
-    
-    <div id="main-content">
-      <router-view />
+
+    <div>
+      <router-view id="main-content"/>
     </div>
   </div>
 </template>
@@ -22,21 +22,14 @@ export default {
 
 <style>
   #app{
-    display: grid;
-    grid-template-columns: 200px 1fr;
     height: 100vh;
-    
   }
-  #Sidebar{
-    
-    position: fixed; 
-   
-    height: 100%;
-    width: 200px;
-
+  #sidebar{
+    z-index: 1;
   }
   #main-content {
-    margin-left: 200px;
+    z-index: 0;
+    margin-left: 50px;
     width: 100vw;
   }
   

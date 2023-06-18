@@ -53,13 +53,15 @@ export default {
 
 <style>
 #Book {
+  background-color: #2d2d2d;
+  color: #828282;
+  padding-left: 1vw;
+  padding-top: 1vh;
   display: grid;
   grid-template-columns: 20vw 50vw;
   grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh 5vh;
-  width: 70vw;
-  height: 30vh;
-  padding-bottom: 1vh;
-  margin-left: 3vw;
+  width: 82vw;
+  height: 32vh;
   justify-content: left;
   /*border-bottom: black 1px solid;*/
 
@@ -139,7 +141,7 @@ export default {
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 7;
-  width: 50vw;
+  width: 60vw;
   padding-left: 1vw;
   white-space: pre-wrap;
   overflow-y: auto;

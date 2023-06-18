@@ -1,52 +1,85 @@
 <template>
-<aside id="Sidebar">
-    <h2 id="SidebarH3">The OnLibrary</h2>
-    <nav>
-            <v-btn class="SideNavBarItems"><RouterLink to="/" class="RouterLink"><span class="material-symbols-outlined">home</span><br>Home</RouterLink></v-btn><br>
-            <v-btn  class="SideNavBarItems"><RouterLink to="/books" class="RouterLink"><span class="material-symbols-outlined">book</span><br>Books</RouterLink></v-btn><br>
-            <v-btn  class="SideNavBarItems"><RouterLink to="/add" class="RouterLink"><span class="material-symbols-outlined">library_add</span><br>Add new book</RouterLink></v-btn>
-        
-        <br>
-        
-        <br>
-        
-      </nav>
-</aside>
+
+  <v-card>
+    <v-layout>
+      <v-navigation-drawer
+        id="navigation-drawer"
+        v-model="drawer"
+        :rail="rail"
+        permanent
+      >
+        <v-list-item
+            class="text"
+            title="The OnLibrary"
+            nav
+        >
+          <template v-slot:append>
+            <v-btn
+                v-if="!rail"
+                variant="text"
+                icon="mdi-chevron-left"
+                @click.stop="rail = !rail"
+            ></v-btn>
+            <v-btn
+                v-if="rail"
+                variant="text"
+                icon="mdi-chevron-right"
+                @click.stop="rail = !rail"
+            ></v-btn>
+          </template>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+            <v-list-item 
+                class="text"
+                prepend-icon="mdi-home-city" 
+                title="Home" 
+                value="home"
+                to="/"
+            />  
+            <v-list-item 
+                class="text"
+                prepend-icon="mdi-account" 
+                title="My Account" 
+                value="account"
+                to="/books"
+            />
+            <v-list-item 
+                class="text"
+                prepend-icon="mdi-account-group-outline" 
+                title="Users" 
+                value="users"
+                to="/add"
+            />
+        </v-list>
+      </v-navigation-drawer>
+      <!--<v-main style="height: 250px"></v-main>-->
+    </v-layout>
+  </v-card>
+
 </template>
 
 <script>
     import { RouterLink, RouterView } from 'vue-router'
+
+    export default {
+        data () {
+            return {
+                drawer: true,
+                rail: true,
+            }
+        },
+    }
 </script>
 
-<style scoped>
-    #Sidebar{
-        background-color: #333333;
+<style>
+    #navigation-drawer{
+        background-color: #3c3c3c;
     }
-    #SidebarH3{
-        padding-top: 10%;
-        padding-bottom: 10%;
-        text-align: center;
-        width: 100%;
-        background-color: black;
-        color: white;
-           
-    }
-    nav{
-        white-space: pre;
-        align-items: center;
-        text-align: center;
-    }
-    .SideNavBarItems{
-        margin-top: 10px;
-        width: 90%;
-        font-size: 18px;
-        padding-bottom: 90px;
-    }
-    .RouterLink{
-        color: #818181;
-        text-decoration: none;
-    }
-    span{
-        font-size: 50px;
+    
+    .text{
+        color: #a6a6a6; 
     }
 </style>
