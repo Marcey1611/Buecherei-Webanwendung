@@ -1,0 +1,8 @@
+Home:
+    Zuletzt ausgeliehen Bücher
+    Top-10
+Books:
+    Bilder holen und an das backend schicken
+    Suche Groß und klein schreibung
+Add New Book:
+    Book schauen ob schon vorhanden
