@@ -6,7 +6,6 @@
         v-model="drawer"
         :rail="rail"
         permanent
-        @click="rail = false"
       >
         <v-list-item
           title="The OnLibrary"
