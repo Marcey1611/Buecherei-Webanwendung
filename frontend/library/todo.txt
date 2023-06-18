@@ -3,6 +3,6 @@ Home:
     Top-10
 Books:
     Bilder holen und an das backend schicken
-    Suche Groß und klein schreibung
+    Suche Groß und klein schreibung (erledigt)
 Add New Book:
     Book schauen ob schon vorhanden
