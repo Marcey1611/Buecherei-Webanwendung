@@ -7,11 +7,13 @@ const filename = __dirname + "/books.json";
 const { promisify } = require('util');
 const { readFile } = require("fs/promises");
 const { error } = require("console");
+const axios =require("axios");
 
 //Middleware
 app.use(express.json());
 app.use(cors());
 function log(req, res, next) {
+    console.log('Test');
     console.log(req.method + " Request at" + req.url);
     next();
 }
@@ -118,4 +120,54 @@ app.post("/books", function (req, res) {
         });
     });
 })
-app.listen(port, () => console.log(`Server listening on port ${port}!`));
+app.listen(port, () => {console.log(`Server listening on port ${port}!`)
+getGoogleBooks()
+});
+function getGoogleBooks() {
+    fs.readFile(filename, "utf8", function (err, data) {
+        let dataArray = JSON.parse(data);
+        //console.log(dataArray);
+        let promises = [];
+
+        dataArray.forEach(element => {
+            try {
+                let promise = axios.get('https://www.googleapis.com/books/v1/volumes', {
+                    params: {
+                        q: 'isbn:' + element.isbn,
+                        maxResults: 1,
+                        key: 'AIzaSyA8Dvs5T5N5GphcuRKPx2ilCcRJWSIvU1A'
+                    }
+                }).then(response => {
+                    element.img = response.data.items[0].volumeInfo.imageLinks.thumbnail;
+                    element.description = response.data.items[0].volumeInfo.description;
+                    //console.log(element);
+                    console.log('Success');
+                }).catch(error => {
+                    console.log('Error');
+                    console.log(error);
+                });
+
+                promises.push(promise);
+            } catch (err) {
+                console.log('Error');
+                console.log(err);
+            }
+        });
+
+        Promise.all(promises)
+            .then(() => {
+                console.log('All requests completed');
+                fs.writeFile(filename, JSON.stringify(dataArray), (err) => {
+                    if (err) {
+                        console.error('Fehler beim Schreiben der Datei:', err);
+                    } else {
+                        console.log('Datei erfolgreich geschrieben.');
+                    }
+                });
+            })
+            .catch(error => {
+                console.log('Error');
+                console.log(error);
+            });
+    });
+}

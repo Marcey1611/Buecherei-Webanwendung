@@ -57,7 +57,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          this.getGoogleImg();
+          //this.getGoogleImg();
         });
     },
     handback: function (book) {
@@ -70,7 +70,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          this.getGoogleImg();
+          //this.getGoogleImg();
         });
     },
     async handleInput() {
@@ -81,12 +81,12 @@ export default {
                     pages: this.filterPagesValue }
         });
         this.books = response.data;
-        this.getGoogleImg();
+        //this.getGoogleImg();
       } catch (error) {
         console.error(error);
       }
     },
-    getGoogleImg() {
+    /*getGoogleImg() {
       let imgresp
       this.books.forEach(element => {
         axios.get('https://www.googleapis.com/books/v1/volumes', {
@@ -105,13 +105,13 @@ export default {
 
       });
 
-    }
+    }*/
 
   },
   mounted() {
     axios.get("http://localhost:8080/books/").then(response => {
       this.books = response.data;
-      this.getGoogleImg()
+      //this.getGoogleImg()
     });
   }
 };
