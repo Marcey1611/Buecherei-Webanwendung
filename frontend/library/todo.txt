@@ -1,6 +1,6 @@
 Home:
     Zuletzt ausgeliehen Bücher
-    Top-10
+    Top-10(Top-5)
     Higlight (highlight)
     überganng
     Sidebar einklappen lassen (erledigt)
@@ -9,10 +9,12 @@ Books:
     zusammenfassung raussuchen lassen (erledigt)
     Filter
     (maybe)autofullfill search
+    autofullfill genre
 Add New Book:
     Book schauen ob schon vorhanden
     ISBN raussuchen lassen(erledigt)
     remove Book
+    genre und Sprache autofulfill
 Backend:
     kategorien(Frontend Add Anpassen)
 Gesammt:
