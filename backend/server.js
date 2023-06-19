@@ -7,7 +7,7 @@ const filename = __dirname + "/books.json";
 const { promisify } = require('util');
 const { readFile } = require("fs/promises");
 const { error } = require("console");
-const axios =require("axios");
+const axios = require("axios");
 
 //Middleware
 app.use(express.json());
@@ -30,7 +30,7 @@ app.get("/books", function (req, res) {
 app.get('/books/search', (req, res) => {
     const searchText = req.query.searchText.toLowerCase();
     console.log(req.query);
-    const languages=req.query.languages;
+    const filterLanguages=req.query.languages;
     const minPages=req.query.pages[0];
     const maxPages=req.query.pages[1];    
     const readFile = promisify(fs.readFile)
@@ -41,45 +41,26 @@ app.get('/books/search', (req, res) => {
             let tmpTitel = item.title.toLowerCase();
             let tmpAuthor = item.author.toLowerCase();
 
-            if (tmpTitel.includes(searchText)) {
-                if(languages!=null){
-                    for (const itemLang of languages) {
-                        if (item.language == itemLang) {
-                            if(item.pages<=maxPages && item.pages>=minPages){
-                                tmp.push(item)
-
-                            }
+            if((tmpTitel.includes(searchText) || tmpAuthor.includes(searchText)) && item.pages<=maxPages && item.pages>=minPages){
+                if(filterLanguages!=null){
+                    for(const itemLang of filterLanguages){
+                        if(item.language==itemLang){
+                            tmp.push(item);
                         }
                     }
                 }else{
-                    tmp.push(item)
+                    tmp.push(item);
                 }
-                
-            } else {
-                if (tmpAuthor.includes(searchText)) {
-                    if(languages[0]!=null){
-                        for (const itemLang of languages) {
-                            if (item.language == itemLang) {
-                                if(item.pages<=maxPages && item.pages>=minPages){
-                                    tmp.push(item)
-                                }
-                                
-                            }
-                        }
-                    }else{
-                        tmp.push(item)
-                    }
                     
-                }
-            }
+            };
         };
         res.json(tmp)
     }).catch((error) =>
         console.log(error)
     )
 
-
 });
+
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
@@ -120,8 +101,9 @@ app.post("/books", function (req, res) {
         });
     });
 })
-app.listen(port, () => {console.log(`Server listening on port ${port}!`)
-getGoogleBooks()
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}!`)
+    getGoogleBooks()
 });
 function getGoogleBooks() {
     fs.readFile(filename, "utf8", function (err, data) {
