@@ -50,7 +50,7 @@
         "author": "J.D. Salinger",
         "releaseYear": 1951,
         "genre": "Fiction",
-        "language": "English",
+        "language": "French",
         "pages": 224,
         "available": true,
         "description": "A coming-of-age novel that has become a modern classic.",
@@ -110,21 +110,6 @@
         "pages": 374,
         "available": true,
         "description": "The first book in a dystopian trilogy where teenagers fight for survival in a televised event.",
-        "firstName": "",
-        "lastName": ""
-    },
-    {
-        "id": 8,
-        "img": "",
-        "isbn": 9783150000014,
-        "title": "Faust",
-        "author": "",
-        "releaseYear": null,
-        "genre": "",
-        "language": "",
-        "pages": null,
-        "available": true,
-        "description": "",
         "firstName": "",
         "lastName": ""
     }

@@ -14,40 +14,6 @@
 <script>
 export default {
   props: ['book'],
-  /*data() {
-    return {
-      resImgURL: ''
-    }
-  },
-  methods: {
-    checkImage:  function (url) {
-      var img = new Image();
-      img.src = url
-      img.addEventListener('load', function () {
-        if (img.naturalWidth >= 2 && img.naturalHeight >= 2) {
-          console.log("Image has the right resulution") 
-          return false
-        } else {
-          console.log("doesnot have the right resulution")
-          return true
-        }
-      })
-    },
-    getImgUrl(event){
-      //this.book.img='https://covers.openlibrary.org/b/isbn/' + this.book.isbn + '-L.jpg'
-      /* try {
-        this.resImgURL = 'https://covers.openlibrary.org/b/isbn/' + this.book.isbn + '-L.jpg'
-        if (this.checkImage(this.resImgURL)) {
-        }
-      } catch {
-      } 
-    }
-
-  },
-    mounted() {
-      document.addEventListener('resize',this.getImgUrl())
-  } */
-
 };
 </script>
 
@@ -63,8 +29,6 @@ export default {
   width: 82vw;
   height: 32vh;
   justify-content: left;
-  /*border-bottom: black 1px solid;*/
-
 }
 
 #BookCoverspace {
@@ -75,30 +39,6 @@ export default {
   width: 20vw;
   height: 30vh;
 }
-
-/*#BookCover {
-  width: 18vw;
-  height: 28vh;
-  margin-top: 1vh;
-  margin-left: 1vw;
-}*/
-
-/*#BookStatusSpace{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 7;
-    grid-row-end: 8;
-    width: 20vw;
-    height: 5vh;
-  }
-
-  #BookStatus{
-    width: 18vw;
-    height: 5vh;
-    margin-top: 1vh; 
-    margin-left: 1vw;
-    text-align: center;
-  }*/
 
 #BookTitle {
   grid-column-start: 2;
