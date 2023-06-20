@@ -4,21 +4,25 @@
     <v-form id="Add">
         <v-text-field v-model="this.title" @blur="getBook()" id="AddTitle" type="text" placeholder="Titel"></v-text-field>
         <div id="idImgDiv">
-            <img  :src="this.cover" id="idImg">
+            <img :src="this.cover" id="idImg">
         </div>
-       
+
         <v-text-field v-model="this.author" @blur="getBook()" id="AddAuthor" type="text" placeholder="Autor"></v-text-field>
         <v-text-field v-model="this.genre" id="Genre" type="text" placeholder="Genre"></v-text-field>
         <v-text-field v-model="this.language" id="Sprache" type="text" placeholder="Sprache"></v-text-field>
-        
-        
+
+
         <form action="upload" id="Bild">
-            <v-file-input label="Bild Hochladen" prepend-icon="mdi-camera" accept="image/png, image/jpeg, image/bmp" variant="underlined" :disabled="this.showUpload"></v-file-input>
+            <v-file-input label="Bild Hochladen" prepend-icon="mdi-camera" accept="image/png, image/jpeg, image/bmp"
+                variant="underlined" :disabled="this.showUpload"></v-file-input>
         </form>
-        <v-text-field v-model="this.isbn" @blur="getCoverByISBN()" id="ISBN" type="number" placeholder="ISBN-13"></v-text-field>
-        <v-text-field v-model="this.releaseYear" id="Erscheinungsjahr" type="number" min="0" step="1" placeholder="Erscheinungsjahr"></v-text-field>
+        <v-text-field v-model="this.isbn" @blur="getCoverByISBN()" id="ISBN" type="number" min="0" step="1"
+            placeholder="ISBN-13"></v-text-field>
+        <v-text-field v-model="this.releaseYear" id="Erscheinungsjahr" type="number" min="0" step="1"
+            placeholder="Erscheinungsjahr"></v-text-field>
         <v-textarea v-model="this.description" id="Beschreibung" type="text" placeholder="Beschreibung"></v-textarea>
-        <v-text-field v-model="this.pages" id="Seitenzahl" type="number" min="0" step="1" placeholder="Seitenanzahn"></v-text-field>
+        <v-text-field v-model="this.pages" id="Seitenzahl" type="number" min="0" step="1"
+            placeholder="Seitenanzahn"></v-text-field>
         <div></div>
         <v-btn @click="addBook" id="idButton">Buch hinzufügen</v-btn>
     </v-form>
@@ -37,48 +41,47 @@ export default {
             releaseYear: '',
             genre: '',
             language: '',
-            pages: '',
+            pages: null,
             description: '',
             cover: this.nopic,
             errorLable: '',
             errorShow: '',
-            showUpload : true,
-            nopic : ''
-            
+            showUpload: true,
+            nopic: '',
+            boolRealBook:false
+
         };
     },
     methods: {
         addBook() {
-            if (this.realNewBook() == true) {
-                if (condition) {
+            console.log(this.title)
+            if (this.realNewBook(this.title) == true) {
                     try {
-                    const newBook = {
-                        isbn: this.isbn,
-                        title: this.title,
-                        author: this.author,
-                        releaseYear: this.releaseYear,
-                        genre: this.genre,
-                        language: this.language,
-                        pages: this.pages,
-                        description: this.description,
-                        cover: this.cover,
-                        firstName: this.firstName,
-                        lastName: this.lastName
-                    };
-                    console.log(newBook)
-                    try {
-                        axios.post('http://localhost:8080/books/', newBook)
-                            .then(response => {
-                                this.newBook = response.data;
-                            })
-                    } catch (error) {
-                        console.log('Failed to export Book')
+                        const newBook = {
+                            isbn: this.isbn,
+                            title: this.title,
+                            author: this.author,
+                            releaseYear: this.releaseYear,
+                            genre: this.genre,
+                            language: this.language,
+                            pages: this.pages,
+                            description: this.description,
+                            cover: this.cover,
+                            firstName: this.firstName,
+                            lastName: this.lastName
+                        };
+                        console.log(newBook)
+                        try {
+                            axios.post('http://localhost:8080/books/', newBook)
+                                .then(response => {
+                                    this.newBook = response.data;
+                                })
+                        } catch (error) {
+                            console.log('Failed to export Book')
+                        }
+                    } catch (err) {
+                        console.log('Error')
                     }
-                } catch (err) {
-                    console.log('Error')
-                }  
-                }
-                
             } else {
                 console.log('Buch ist bereits in der Datenbank')
                 this.errorLable = 'Buch ist bereits in der Datenbank'
@@ -88,6 +91,7 @@ export default {
         },
 
         getBook() {
+            this.disableErrorMSG()
             if (this.title != '' && this.author != '' && this.isbn == '') {
                 try {
                     axios.get('https://www.googleapis.com/books/v1/volumes', {
@@ -97,26 +101,27 @@ export default {
                             key: 'AIzaSyA8Dvs5T5N5GphcuRKPx2ilCcRJWSIvU1A'
                         }
                     }).then(response => {
+                        let tmpISBN
                         console.log(response)
-                        //console.log(response.data.items)
+                        console.log(response.data.items[0].volumeInfo)
+                        let respInfo = response.data.items[0].volumeInfo
                         try {
-                            let respInfo = response.data.items[0].volumeInfo
                             respInfo.industryIdentifiers.forEach(element => {
                                 if (element.type == "ISBN_13") {
                                     tmpISBN = parseInt(element.identifier)
                                     console.log(tmpISBN)
                                 }
                             })
-                            tmpYear = respInfo.publishedDate.substring(0, 4);
-                                this.isbn = tmpISBN,
-                                this.title = respInfo.title,
-                                this.author = respInfo.authors[0],
-                                this.releaseYear = parseInt(tmpYear),
-                                this.genre = respInfo.categories[0],
-                                this.language = respInfo.language,
-                                this.pages = respInfo.pagecount,
-                                this.description = respInfo.description,
-                                this.cover = respInfo.imageLinks.thumbnail
+                            let tmpYear = respInfo.publishedDate.substring(0, 4)
+                            this.isbn = tmpISBN
+                            this.title = respInfo.title
+                            this.author = respInfo.authors[0]
+                            this.releaseYear = tmpYear
+                            this.genre = respInfo.categories[0]
+                            this.language = respInfo.language
+                            this.pages = respInfo.pagecount
+                            this.description = respInfo.description
+                            this.cover = respInfo.imageLinks.thumbnail
                         } catch (error) {
                             console.log('Error2')
                         }
@@ -125,7 +130,7 @@ export default {
                     console.log('Error')
                 }
             }
-            if ((this.title == ''&& this.cover !=this.nopic) || (this.author == '' && this.cover !=this.nopic)) {
+            if ((this.title == '' && this.cover != this.nopic) || (this.author == '' && this.cover != this.nopic)) {
                 this.cover = this.nopic
             }
         },
@@ -134,17 +139,20 @@ export default {
                 axios.get("http://localhost:8080/books/").then(response => {
                     response.data.forEach(element => {
                         if (element.title.includes(this.title)) {
-                            return false;
+                            console.log(element.title)
+                            console.log(this.title)
+                            this.boolRealBook = false;
                         }
                     })
-                    return true
+                    this.boolRealBook = true
                 })
             } catch (error) {
                 console.log("Error")
             }
         },
-        getCoverByISBN(){
-            if (this.isbn!= '' && this.cover == this.nopic) {
+        getCoverByISBN() {
+            this.disableErrorMSG()
+            if (this.isbn != '' && this.cover == this.nopic) {
                 try {
                     this.cover = 'https://covers.openlibrary.org/b/isbn/' + this.isbn + '-L.jpg'
                     console.log(this.cover)
@@ -152,25 +160,29 @@ export default {
                 } catch (error) {
                     console.log('Error while downloading img')
                 }
-            }if (this.isbn== '' && this.cover != this.nopic) {
+            } if (this.isbn == '' && this.cover != this.nopic) {
                 this.cover = this.nopic
                 this.showUpload = true
             }
         },
-        titlecorrespondstoISBN(){
+        titlecorrespondstoISBN() {
             try {
-                
+
             } catch (error) {
-                
+
             }
+        },
+        disableErrorMSG() {
+            this.errorLable = ''
+            this.errorShow = true;
         }
     },
     mounted() {
         import('@/assets/pictures/nopic.jpg')
-      .then((image) => {
-        this.nopic = image.default;
-        this.cover = this.nopic;
-      })
+            .then((image) => {
+                this.nopic = image.default;
+                this.cover = this.nopic;
+            })
     }
 }
 
@@ -197,7 +209,8 @@ export default {
     margin-left: 3vw;
     justify-content: left;
 }
-#idImgDiv{
+
+#idImgDiv {
     max-height: 100%;
     max-width: 100%;
     width: 100%;
@@ -207,8 +220,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
+
 #idImg {
     max-height: 100%;
     max-width: 100%;
@@ -236,7 +250,8 @@ export default {
     white-space: pre-wrap;
     overflow-y: auto;
 }
-#idButton{
+
+#idButton {
     max-width: 100%;
     max-height: 100%;
     height: 100%;
