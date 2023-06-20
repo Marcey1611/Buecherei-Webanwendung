@@ -126,7 +126,7 @@ function getGoogleBooks() {
                     console.log('Success');
                 }).catch(error => {
                     console.log('Error');
-                    console.log('Error from Google or Ehasuted');
+                    console.log('Error from Google or Exhausted');
                     try {
                         element.img = 'https://covers.openlibrary.org/b/isbn/'+ element.isbn+'-L.jpg'
                     } catch (error) {
