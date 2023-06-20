@@ -10,6 +10,7 @@ body{
 main{
     padding:3rem;
     background-color: #1e1e1e;
+    animation: transitionIn 1s;
   }
 
 .material-symbols-outlined {
@@ -18,4 +19,15 @@ font-variation-settings:
 'wght' 400,
 'GRAD' 0,
 'opsz' 48
+}
+
+@keyframes transitionIn{
+  from{
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+  to{
+    opacity: 1;
+    transform: rotateX(0);
+  }
 }

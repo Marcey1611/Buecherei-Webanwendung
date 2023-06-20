@@ -31,6 +31,7 @@ export default {
     z-index: 0;
     margin-left: 50px;
     width: 100vw;
+    animation: transitionIn 1s;
   }
   
 
