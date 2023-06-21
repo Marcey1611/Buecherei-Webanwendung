@@ -102,8 +102,10 @@ export default {
         },
 
         getBook() {
+            console.log("getBook enterd");
             this.disableErrorMSG()
-            if (this.title != '' && this.author != '' && this.isbn == '') {
+            console.log("disable Messages");
+            if (this.title != '' && this.author != '' && this.isbn == null ) {
                 try {
                     axios.get('https://www.googleapis.com/books/v1/volumes', {
                         params: {
