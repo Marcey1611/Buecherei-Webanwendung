@@ -102,7 +102,7 @@ export default {
           this.handleInput();
         });
     },
-    getFilterGenreValues() {
+    getFilterGenreValues: function() {
       axios.get("http://localhost:8080/books/genre").then(response => {
           this.genres = response.data;
         });
