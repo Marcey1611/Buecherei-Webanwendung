@@ -1,5 +1,4 @@
 Home:
-    Zuletzt ausgeliehen Bücher
     Top-10(Top-5)
     Higlight (highlight)
     überganng(erledigt)
@@ -16,6 +15,7 @@ Add New Book:
     remove Book
     genre und Sprache autofulfill
     Owner Name
+    fehler feld
 Backend:
     kategorien(Frontend Add Anpassen)
     owner Hinzufügen

@@ -92,7 +92,8 @@ app.post("/books", function (req, res) {
             available: true,
             description: req.body.description,
             firstName: req.body.firstName,
-            lastName: req.body.lastName
+            lastName: req.body.lastName,
+            borrowCount:0
         });
         fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
             res.writeHead(200, {
@@ -123,6 +124,7 @@ function getGoogleBooks() {
                 }).then(response => {
                     element.img = response.data.items[0].volumeInfo.imageLinks.thumbnail;
                     element.description = response.data.items[0].volumeInfo.description;
+                    element.borrowCount = Math.floor((Math.random() * 10)) + 1
                     //console.log(element);
                     console.log('Success');
                 }).catch(error => {

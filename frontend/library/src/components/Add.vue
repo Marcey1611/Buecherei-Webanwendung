@@ -10,7 +10,7 @@
         <v-text-field v-model="this.author" @blur="getBook()" id="AddAuthor" type="text" placeholder="Autor"></v-text-field>
         <v-text-field v-model="this.genre" id="Genre" type="text" placeholder="Genre"></v-text-field>
         <v-text-field v-model="this.language" id="Sprache" type="text" placeholder="Sprache"></v-text-field>
-
+       
 
         <form action="upload" id="Bild">
             <v-file-input label="Bild Hochladen" prepend-icon="mdi-camera" accept="image/png, image/jpeg, image/bmp"
@@ -20,11 +20,12 @@
             placeholder="ISBN-13"></v-text-field>
         <v-text-field v-model="this.releaseYear" id="Erscheinungsjahr" type="number" min="0" step="1"
             placeholder="Erscheinungsjahr"></v-text-field>
-        <v-textarea v-model="this.description" id="Beschreibung" type="text" placeholder="Beschreibung"></v-textarea>
-        <v-text-field v-model="this.pages" id="Seitenzahl" type="number" min="0" step="1"
-            placeholder="Seitenanzahn"></v-text-field>
+     <v-text-field v-model="this.pages" id="Seitenzahl" type="number" min="0" step="1" placeholder="Seitenanzahn"></v-text-field>
+     <v-textarea v-model="this.description" id="Beschreibung" type="text" placeholder="Beschreibung"></v-textarea>
+
+        <v-text-field v-model="this.owner" id="Sprache" type="text" placeholder="Besitzer"></v-text-field>
         <div></div>
-        <v-btn @click="addBook" id="idButton">Buch hinzufügen</v-btn>
+        <v-btn @click="addBook()" id="idButton">Buch hinzufügen</v-btn>
     </v-form>
 </template>
   
@@ -43,19 +44,22 @@ export default {
             language: '',
             pages: null,
             description: '',
+            owner: '',
             cover: this.nopic,
             errorLable: '',
             errorShow: '',
             showUpload: true,
             nopic: '',
-            boolRealBook:false
+            boolRealBook: null
 
         };
     },
     methods: {
         addBook() {
-            console.log(this.title)
-            if (this.realNewBook(this.title) == true) {
+            console.log(this.isbn)
+            this.realNewBook(this.isbn).then(bresponse => {
+                console.log("Hallo")
+            if (bresponse == true) {
                     try {
                         const newBook = {
                             isbn: this.isbn,
@@ -64,18 +68,25 @@ export default {
                             releaseYear: this.releaseYear,
                             genre: this.genre,
                             language: this.language,
-                            pages: this.pages,
+                            pages: parseInt(this.pages),
                             description: this.description,
                             cover: this.cover,
                             firstName: this.firstName,
-                            lastName: this.lastName
+                            lastName: this.lastName,
+                            owner: this.owner,
+                            borrowCount:0,
+                            available: true
+
                         };
                         console.log(newBook)
                         try {
+                            console.log("Try to send Data")
                             axios.post('http://localhost:8080/books/', newBook)
                                 .then(response => {
                                     this.newBook = response.data;
+                                    console.log("recieved data")
                                 })
+                            
                         } catch (error) {
                             console.log('Failed to export Book')
                         }
@@ -87,7 +98,8 @@ export default {
                 this.errorLable = 'Buch ist bereits in der Datenbank'
                 this.errorShow = true
             }
-
+            })
+            
         },
 
         getBook() {
@@ -113,15 +125,15 @@ export default {
                                 }
                             })
                             let tmpYear = respInfo.publishedDate.substring(0, 4)
-                            this.isbn = tmpISBN
-                            this.title = respInfo.title
-                            this.author = respInfo.authors[0]
-                            this.releaseYear = tmpYear
-                            this.genre = respInfo.categories[0]
-                            this.language = respInfo.language
-                            this.pages = respInfo.pagecount
-                            this.description = respInfo.description
-                            this.cover = respInfo.imageLinks.thumbnail
+                            try{this.isbn = tmpISBN}catch{console.log("ISBN Is not available")}
+                            try{this.title = respInfo.title}catch{console.log("Title Is not available")}
+                            try{this.releaseYear = tmpYear}catch{console.log("releaseYear Is not available")}
+                            try{this.author = respInfo.authors[0]}catch{console.log("Author Is not available")}
+                            try{this.language = respInfo.language}catch{console.log("language Is not available")}
+                            try{this.genre = respInfo.categories[0]}catch{console.log("Categories Is not available")}
+                            try{this.pages = respInfo.pagecount}catch{console.log("pagecount Is not available")}
+                            try{this.description = respInfo.description}catch{console.log("Description Is not available")}
+                            try{this.cover = respInfo.imageLinks.thumbnail}catch{console.log("Cover Is not available")}
                         } catch (error) {
                             console.log('Error2')
                         }
@@ -134,21 +146,18 @@ export default {
                 this.cover = this.nopic
             }
         },
-        realNewBook() {
-            try {
-                axios.get("http://localhost:8080/books/").then(response => {
+        realNewBook(tmpISBN) {
+        return new Promise(function(resolve){
+            axios.get("http://localhost:8080/books/").then(response => {
+                console.log(response.data)
                     response.data.forEach(element => {
-                        if (element.title.includes(this.title)) {
-                            console.log(element.title)
-                            console.log(this.title)
-                            this.boolRealBook = false;
+                        console.log(element.isbn)
+                        if (element.isbn == tmpISBN){
+                            resolve(flase);
                         }
                     })
-                    this.boolRealBook = true
-                })
-            } catch (error) {
-                console.log("Error")
-            }
+                    resolve(true);})})
+
         },
         getCoverByISBN() {
             this.disableErrorMSG()
@@ -175,6 +184,16 @@ export default {
         disableErrorMSG() {
             this.errorLable = ''
             this.errorShow = true;
+        },
+        clearFields(){
+            this.isbn= '',
+            this.title= '',
+            this.author= '',
+            this.releaseYear= '',
+            this.genre= '',
+            this.language= '',
+            this.pages= null,
+            this.description= ''
         }
     },
     mounted() {
@@ -201,7 +220,7 @@ export default {
     color: #828282;
     display: grid;
     grid-template-columns: 40vw 40vw;
-    grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh 5vh;
+    grid-template-rows: 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh;
     grid-gap: 20px;
     width: auto;
     height: auto;

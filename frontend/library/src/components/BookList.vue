@@ -79,7 +79,8 @@ export default {
         .put("http://localhost:8080/books/" + book.id, {
           firstName: book.firstName,
           lastName: book.lastName,
-          available: false
+          available: false,
+          borrowCount: book.borrowCount +1
 
         })
         .then(response => {
@@ -112,6 +113,7 @@ export default {
           }
         });
         this.books = response.data;
+        console.log(this.books)
       } catch (error) {
         console.error(error);
       }
