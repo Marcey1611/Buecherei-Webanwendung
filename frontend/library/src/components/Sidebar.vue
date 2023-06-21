@@ -34,6 +34,7 @@
         <v-list density="compact" nav>
             <v-list-item 
                 class="text"
+                :class="{ 'active-item': activeItem === 'home' }"
                 prepend-icon="mdi-home-city" 
                 title="Home" 
                 value="home"
@@ -41,16 +42,18 @@
             />  
             <v-list-item 
                 class="text"
+                :class="{ 'active-item': activeItem === 'books' }"
                 prepend-icon="mdi-book" 
                 title="Books" 
-                value="account"
+                value="books"
                 to="/books"
             />
             <v-list-item 
                 class="text"
+                :class="{ 'active-item': activeItem === 'add' }"
                 prepend-icon="mdi-plus" 
                 title="Add book" 
-                value="users"
+                value="add"
                 to="/add"
             />
         </v-list>
@@ -69,6 +72,7 @@
             return {
                 drawer: true,
                 rail: true,
+                activeItem: 'home',
             }
         },
     }
@@ -82,5 +86,9 @@
     
     .text{
         color: #a6a6a6; 
+    }
+    .active-item{
+      background-color: #0E639C;
+      color: white;
     }
 </style>
