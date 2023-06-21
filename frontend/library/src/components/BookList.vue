@@ -1,8 +1,8 @@
 <template>
   <div id="BookList">
     <div id="SearchFilterBar">
-      <div id="SearchField"><v-text-field @clear="handleInput" @input="handleInput"
-          v-model="searchInput" placeholder="Suche" clearable prepend-icon="mdi-magnify"></v-text-field></div>
+      <div id="SearchField"><v-text-field @clear="handleInput" @input="handleInput" v-model="searchInput"
+          placeholder="Suche" clearable prepend-icon="mdi-magnify"></v-text-field></div>
       <div id="filterChevronButton"><v-icon :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
           @click="show = !show"></v-icon></div>
       <br>
@@ -11,9 +11,12 @@
           <div id="filterLanguages"><v-select @blur="handleInput" clearable chips label="Sprache"
               v-model="selectedLanguages" :items="languages" multiple></v-select>
           </div>
+          <div id="filterGenre">
+            <v-autocomplete v-model="filterGenreValue" label="Genre" :items="genres" @click="getFilterGenreValues" @blur="handleInput"></v-autocomplete>
+          </div>
           <div id="filterYearFrom">
-            <v-text-field type="number" v-model="filterYearValue[0]" @blur="handleInput" label="Jahr: von "></v-text-field>
-            
+            <v-text-field type="number" v-model="filterYearValue[0]" @blur="handleInput"
+              label="Jahr: von "></v-text-field>
           </div>
           <div id="filterYearTo">
             <v-text-field type="number" v-model="filterYearValue[1]" @blur="handleInput" label=" bis "></v-text-field>
@@ -24,15 +27,11 @@
               @change="handleInput"></v-switch>
           </div>
           <div id="filterPages">
-            <v-range-slider @click="handleInput" max="2000" label="Seitenzahl" color="#616161" track-fill-color="#0E639C"
+            <v-range-slider @click="handleInput" max="1000" label="Seitenzahl" color="#616161" track-fill-color="#0E639C"
               thumb-color="#0E639C" v-model="filterPagesValue" step="1" thumb-label="always"></v-range-slider>
           </div>
-
-
         </div>
       </v-expand-transition>
-
-
     </div>
     <transition-group name="fade" tag="div">
       <div class="Books" v-for="book in books" :key="book.id">
@@ -56,16 +55,18 @@
 <script>
 import Book from './Book.vue';
 import axios from 'axios';
-var date=new Date();
+var date = new Date();
 export default {
   components: {
     Book
   },
   data: function () {
     return {
+      filterGenreValue: '',
+      genres: [],
       filterYearValue: [0, date.getFullYear()],
       filterAvailableValue: true,
-      filterPagesValue: [0, 2000],
+      filterPagesValue: [0, 1000],
       show: false,
       languages: ['English', 'German', 'French', 'Italian'],
       selectedLanguages: [],
@@ -80,7 +81,7 @@ export default {
           firstName: book.firstName,
           lastName: book.lastName,
           available: false,
-          borrowCount: book.borrowCount +1
+          borrowCount: book.borrowCount + 1
 
         })
         .then(response => {
@@ -101,6 +102,11 @@ export default {
           this.handleInput();
         });
     },
+    getFilterGenreValues() {
+      axios.get("http://localhost:8080/books/genre").then(response => {
+          this.genres = response.data;
+        });
+    },
     async handleInput() {
       try {
         const response = await axios.get('http://localhost:8080/books/search', {
@@ -109,7 +115,8 @@ export default {
             languages: this.selectedLanguages,
             pages: this.filterPagesValue,
             available: this.filterAvailableValue,
-            year: this.filterYearValue
+            year: this.filterYearValue,
+            genre: this.filterGenreValue,
           }
         });
         this.books = response.data;
@@ -144,24 +151,22 @@ export default {
   padding-right: 1vw;
   justify-content: left;
   border-bottom: #616161 1px solid;
+  color: white;
 }
 
 .BookListBorrowInput {
   margin-right: 1vw;
   height: 6vh;
-  color: white;
 }
 
 #BookListBorrowButton {
   height: 6vh;
   background-color: #0E639C;
-  color: white;
 }
 
 #BookListHandBackButton {
   height: 6vh;
   background-color: #0E639C;
-  color: white;
 }
 
 #SearchFilterBar {
@@ -194,11 +199,12 @@ export default {
 #filterBar {
   padding-top: 2vh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 30vh;
+  height: 35vh;
   margin-left: 3vw;
   margin-right: 3vw;
+  color: white;
 }
 
 #filterLanguages {
@@ -206,43 +212,44 @@ export default {
   grid-column-end: 5;
   grid-row-start: 1;
   grid-row-end: 2;
-  color: white;
-  height: 6vh;
-  width: 35vw;
+}
+
+#filterGenre{
+  grid-column-start: 6;
+  grid-column-end: 10;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#filterAvailable {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#filterYearFrom {
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#filterYearTo {
+  grid-column-start: 8;
+  grid-column-end: 10;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
 #filterPages {
   margin-top: 1vh;
   grid-column-start: 1;
-  grid-column-end: 8;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  color: white;
+  grid-column-end: 9;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
-#filterAvailable {
-  grid-column-start: 7;
-  grid-column-end: 8;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  margin-left: 3vw;
-}
-#filterYearFrom{
-  grid-column-start: 5;
-  grid-column-end: 6;
-  height: 6vh;
-  color: white;
-  margin-left: 3vw;
-  width: 8vw;
-}
-#filterYearTo{
-  grid-column-start: 6;
-  grid-column-end: 7;
-  height: 6vh;
-  color: white;
-  margin-left: 2vw;
-  width: 8vw;
-}
 .switch-on {
   color: #0E639C;
 }
