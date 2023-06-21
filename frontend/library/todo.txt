@@ -10,11 +10,11 @@ Books:
     autofullfill genre
     sprache
 Add New Book:
-    Book schauen ob schon vorhanden
+    Book schauen ob schon vorhanden(erledigt)
     ISBN raussuchen lassen(erledigt)
     remove Book
     genre und Sprache autofulfill
-    Owner Name
+    Owner Name(erledigt)
     fehler feld
 Backend:
     kategorien(Frontend Add Anpassen)

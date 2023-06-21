@@ -93,6 +93,7 @@ app.post("/books", function (req, res) {
             description: req.body.description,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
+            owner:req.body.owner,
             borrowCount:0
         });
         fs.writeFile(filename, JSON.stringify(dataAsObject), () => {

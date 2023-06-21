@@ -21,9 +21,10 @@
         <v-text-field v-model="this.releaseYear" id="Erscheinungsjahr" type="number" min="0" step="1"
             placeholder="Erscheinungsjahr"></v-text-field>
      <v-text-field v-model="this.pages" id="Seitenzahl" type="number" min="0" step="1" placeholder="Seitenanzahn"></v-text-field>
-     <v-textarea v-model="this.description" id="Beschreibung" type="text" placeholder="Beschreibung"></v-textarea>
 
         <v-text-field v-model="this.owner" id="Sprache" type="text" placeholder="Besitzer"></v-text-field>
+        <v-textarea v-model="this.description" id="Beschreibung" type="text" placeholder="Beschreibung"></v-textarea>
+
         <div></div>
         <v-btn @click="addBook()" id="idButton">Buch hinzufügen</v-btn>
     </v-form>
@@ -36,31 +37,29 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            isbn: '',
+            isbn: null,
             title: '',
             author: '',
-            releaseYear: '',
+            releaseYear: null,
             genre: '',
             language: '',
             pages: null,
             description: '',
-            owner: '',
             cover: this.nopic,
             errorLable: '',
             errorShow: '',
             showUpload: true,
             nopic: '',
             boolRealBook: null
-
         };
     },
     methods: {
         addBook() {
             console.log(this.isbn)
-            this.realNewBook(this.isbn).then(bresponse => {
+            this.realNewBook(this.isbn).then(() => {
                 console.log("Hallo")
-            if (bresponse == true) {
                     try {
+                        
                         const newBook = {
                             isbn: this.isbn,
                             title: this.title,
@@ -93,11 +92,11 @@ export default {
                     } catch (err) {
                         console.log('Error')
                     }
-            } else {
+            }).catch(() => {
                 console.log('Buch ist bereits in der Datenbank')
                 this.errorLable = 'Buch ist bereits in der Datenbank'
                 this.errorShow = true
-            }
+                
             })
             
         },
@@ -127,11 +126,11 @@ export default {
                             let tmpYear = respInfo.publishedDate.substring(0, 4)
                             try{this.isbn = tmpISBN}catch{console.log("ISBN Is not available")}
                             try{this.title = respInfo.title}catch{console.log("Title Is not available")}
-                            try{this.releaseYear = tmpYear}catch{console.log("releaseYear Is not available")}
+                            try{this.releaseYear = parseInt(tmpYear)}catch{console.log("releaseYear Is not available")}
                             try{this.author = respInfo.authors[0]}catch{console.log("Author Is not available")}
                             try{this.language = respInfo.language}catch{console.log("language Is not available")}
                             try{this.genre = respInfo.categories[0]}catch{console.log("Categories Is not available")}
-                            try{this.pages = respInfo.pagecount}catch{console.log("pagecount Is not available")}
+                            try{this.pages = respInfo.pageCount}catch{console.log("pagecount Is not available")}
                             try{this.description = respInfo.description}catch{console.log("Description Is not available")}
                             try{this.cover = respInfo.imageLinks.thumbnail}catch{console.log("Cover Is not available")}
                         } catch (error) {
@@ -147,13 +146,13 @@ export default {
             }
         },
         realNewBook(tmpISBN) {
-        return new Promise(function(resolve){
+        return new Promise(function(resolve,reject){
             axios.get("http://localhost:8080/books/").then(response => {
                 console.log(response.data)
                     response.data.forEach(element => {
                         console.log(element.isbn)
                         if (element.isbn == tmpISBN){
-                            resolve(flase);
+                            reject();
                         }
                     })
                     resolve(true);})})
