@@ -1,5 +1,4 @@
 <template>
-
   <v-card>
     <v-layout>
       <v-navigation-drawer
@@ -34,7 +33,6 @@
         <v-list density="compact" nav>
             <v-list-item 
                 class="text"
-                :class="{ 'active-item': activeItem === 'home' }"
                 prepend-icon="mdi-home-city" 
                 title="Home" 
                 value="home"
@@ -42,7 +40,6 @@
             />  
             <v-list-item 
                 class="text"
-                :class="{ 'active-item': activeItem === 'books' }"
                 prepend-icon="mdi-book" 
                 title="Books" 
                 value="books"
@@ -50,7 +47,6 @@
             />
             <v-list-item 
                 class="text"
-                :class="{ 'active-item': activeItem === 'add' }"
                 prepend-icon="mdi-plus" 
                 title="Add book" 
                 value="add"
@@ -61,12 +57,10 @@
       <!--<v-main style="height: 250px"></v-main>-->
     </v-layout>
   </v-card>
-
 </template>
 
 <script>
     import { RouterLink, RouterView } from 'vue-router'
-
     export default {
         data () {
             return {
@@ -83,12 +77,7 @@
         background-color: #3c3c3c;
         color: #a6a6a6;
     }
-    
     .text{
         color: #a6a6a6; 
-    }
-    .active-item{
-      background-color: #0E639C;
-      color: white;
     }
 </style>
