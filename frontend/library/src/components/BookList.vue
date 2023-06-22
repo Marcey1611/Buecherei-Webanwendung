@@ -11,7 +11,7 @@
       <v-expand-transition>
         <div v-show="showFilterBar" id="filterBar">
           <div id="filterLanguages">
-            <v-autocomplete @click="getFilterLangValues" @blur="handleInput" clearable chips deletable-chips label="Sprache" 
+            <v-autocomplete class="filterLangGenreDropdown" chips @click="getFilterLangValues" @blur="handleInput" clearable deletable-chips label="Sprache" 
               v-model="selectedLanguages" :items="languages" multiple  :menu-props="{ maxHeight:  250}"></v-autocomplete>
           </div>
           <div id="filterGenre">
@@ -76,8 +76,6 @@ export default {
           firstName: e.firstName,
           lastName: e.lastName,
           available: false,
-          borrowCount: e.borrowCount + 1
-
         })
         .then(response => {
           this.books = response.data;
@@ -90,7 +88,6 @@ export default {
           firstName: '',
           lastName: '',
           available: true
-
         })
         .then(response => {
           this.books = response.data;
@@ -148,17 +145,24 @@ export default {
   border-radius: 1vh 1vh 1vh 1vh;
 }
 #SearchField {
+  padding-top: 1vh;
   width: 75vw;
   color: white;
 }
 #filterChevronButton {
   margin-left: 1vw;
-  padding-top: 1vh;
+  padding-top: 2vh;
   font-size: 3vh;
   height: 4vh;
   width: 4vh;
   text-align: center;
+  color: #828282;
+}
+#filterChevronButton:hover{
   color: white;
+}
+#filterChevronButton:active{
+  color: #0E639C;
 }
 #filterBar {
   padding-top: 2vh;
@@ -181,6 +185,10 @@ export default {
   grid-column-end: 10;
   grid-row-start: 1;
   grid-row-end: 2;
+}
+.filterLangGenreDropdown.v-menu__content{
+  
+  background-color: #0E639C;
 }
 #filterAvailable {
   grid-column-start: 2;
