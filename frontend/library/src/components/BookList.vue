@@ -5,14 +5,14 @@
         <v-text-field @clear="handleInput" @input="handleInput" v-model="searchInput"
           placeholder="Suche" clearable prepend-icon="mdi-magnify"></v-text-field></div>
       <div id="filterChevronButton">
-        <v-icon :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-icon>
+        <v-icon :icon="showFilterBar ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="showFilterBar = !showFilterBar"></v-icon>
       </div>
       <br>
       <v-expand-transition>
-        <div v-show="show" id="filterBar">
+        <div v-show="showFilterBar" id="filterBar">
           <div id="filterLanguages">
-            <v-select @blur="handleInput" clearable chips label="Sprache" 
-              v-model="selectedLanguages" :items="languages" multiple ></v-select>
+            <v-autocomplete @click="getFilterLangValues" @blur="handleInput" clearable chips deletable-chips label="Sprache" 
+              v-model="selectedLanguages" :items="languages" multiple  :menu-props="{ maxHeight:  250}"></v-autocomplete>
           </div>
           <div id="filterGenre">
             <v-autocomplete v-model="filterGenreValue" label="Genre" :items="genres" 
@@ -62,8 +62,8 @@ export default {
       filterYearValue: [0, date.getFullYear()],
       filterAvailableValue: true,
       filterPagesValue: [0, 1000],
-      show: false,
-      languages: ['English', 'German', 'French', 'Italian'],
+      showFilterBar: false,
+      languages: [],
       selectedLanguages: [],
       books: [],
       searchInput: '',
@@ -100,6 +100,11 @@ export default {
     getFilterGenreValues: function() {
       axios.get("http://localhost:8080/books/genre").then(response => {
           this.genres = response.data;
+        });
+    },
+    getFilterLangValues: function() {
+      axios.get("http://localhost:8080/books/language").then(response => {
+          this.languages = response.data;
         });
     },
     async handleInput() {
@@ -154,7 +159,6 @@ export default {
   width: 4vh;
   text-align: center;
   color: white;
-  text-align: center;
 }
 #filterBar {
   padding-top: 2vh;

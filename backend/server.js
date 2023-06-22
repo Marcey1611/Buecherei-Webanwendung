@@ -74,7 +74,22 @@ app.get('/books/genre', (req,res) => {
     }).catch((error) =>
     console.log(error)
 )
-})
+});
+app.get('/books/language', (req,res) => {
+    readFile(filename, "utf8").then((data) => {
+        const books=JSON.parse(data);
+        const lang=[];
+        for(const item of books){
+            if(!lang.includes(item.language)){
+                lang.push(item.language);   
+            }
+        };
+        console.log(lang);
+        res.json(lang);
+    }).catch((error) =>
+    console.log(error)
+)
+});
 
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
