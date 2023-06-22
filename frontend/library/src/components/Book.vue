@@ -98,14 +98,15 @@ export default {
   padding-left: 1vw;
   padding-right: 1vw;
   padding-top: 1vh;
-  padding-bottom: 1vh;
+  padding-bottom: 3vh;
   display: grid;
-  grid-template-columns: 20vw 50vw 5vw;
+  grid-template-columns: 15vw 55vw 5vw;
   grid-template-rows: 8vh 6vh 6vh;
   width: 82vw;
   height: max-content;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 1vh 1vh 0vh 0vh;
+  border-bottom: #828282 1px solid;
 }
 
 #bookCoverspace {
@@ -156,6 +157,7 @@ export default {
   text-align: center;
   padding-right: 0.75vw;
   font-size: 3vh;
+  color: white;
 }
 
 #bookMoreInfos {
@@ -167,8 +169,10 @@ export default {
   background-color: #2d2d2d;
   padding-left: 1vw;
   padding-right: 1vw;
-  padding-top: 1vh;
+  padding-top: 3vh;
   padding-bottom: 1vh;
+  border-radius: 0vh 0vh 1vh 1vh;
+  
 }
 
 #bookMoreInfosYearPagesLang {

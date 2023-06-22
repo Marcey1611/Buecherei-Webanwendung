@@ -97,6 +97,9 @@ app.put("/books/:id", function (req, res) {
         dataAsObject[req.params.id].firstName = req.body.firstName;
         dataAsObject[req.params.id].lastName = req.body.lastName;
         dataAsObject[req.params.id].available = req.body.available;
+        if(!req.body.available){
+            dataAsObject[req.params.id].borrowCount++;
+        }
         fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
             res.writeHead(200, {
                 "Content-Type": "application/json",
