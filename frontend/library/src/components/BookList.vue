@@ -6,8 +6,7 @@
           placeholder="Suche" clearable prepend-icon="mdi-magnify"></v-text-field></div>
       <div id="filterChevronButton">
         <v-icon :icon="showFilterBar ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="showFilterBar = !showFilterBar"></v-icon>
-      </div>
-      <br>
+      </div></div>
       <v-expand-transition>
         <div v-show="showFilterBar" id="filterBar">
           <div id="filterLanguages">
@@ -38,7 +37,7 @@
           </div>
         </div>
       </v-expand-transition>
-    </div>
+    
     <transition-group name="fade" tag="div">
       <div class="Books" v-for="book in books" :key="book.id">
         <Book :book="book" @borrow="borrow" @handback="handback"/>
@@ -133,25 +132,30 @@ export default {
 .Books {
   margin-top: 3vh;
   margin-bottom: 3vh;
+  width: 95%;
 }
 #SearchFilterBar {
   padding-top: 1vh;
   padding-left: 1vw;
+  padding-bottom: 1vh;
   background-color: #2d2d2d;
-  width: 82vw;
+  width: 95%;
   display: grid;
-  grid-template-columns: 5fr 1fr 1fr;
+  grid-template-columns: 95% 5%;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 1vh 1vh 1vh 1vh;
+  border-radius: 1vh 1vh 0vh 0vh;
 }
 #SearchField {
   padding-top: 1vh;
-  width: 75vw;
+  padding-right: 1vw;
+  width: 100%;
   color: white;
 }
 #filterChevronButton {
-  margin-left: 1vw;
+  grid-column-start: 2;
+  grid-column-end: 3;
   padding-top: 2vh;
+  
   font-size: 3vh;
   height: 4vh;
   width: 4vh;
@@ -165,14 +169,16 @@ export default {
   color: #0E639C;
 }
 #filterBar {
-  padding-top: 2vh;
+  width: 95%;
+  background-color: #2d2d2d;
+  
+  padding-left: 2vw;
+  padding-right: 2vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 35vh;
-  margin-left: 3vw;
-  margin-right: 3vw;
   color: white;
+  border-radius: 0vh 0vh 1vh 1vh;
 }
 #filterLanguages {
   grid-column-start: 1;
@@ -185,10 +191,6 @@ export default {
   grid-column-end: 10;
   grid-row-start: 1;
   grid-row-end: 2;
-}
-.filterLangGenreDropdown.v-menu__content{
-  
-  background-color: #0E639C;
 }
 #filterAvailable {
   grid-column-start: 2;
