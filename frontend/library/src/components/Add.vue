@@ -1,33 +1,45 @@
 <template>
-    <h1 id="AddH1">Add a new book to our libraray</h1>
+    <h1 id="AddH1">Füge ein neues Buch zur Bibliothek hinzu!</h1>
     <label v-show="errorShow" id="errLable">{{ errorLable }}</label>
-    <v-form id="Add">
-        <v-text-field v-model="this.title" @blur="getBook()" id="AddTitle" type="text" placeholder="Titel"></v-text-field>
+    
+    <div id="idDivclearAdd">
+        <v-icon id="idclearAdd" @click="this.clearFields">mdi-close</v-icon>
+    <v-form id="Add" ref="form">
+        <div id="idBuch">
+            <v-text-field v-model="this.title" @blur="getBook()" id="AddTitle" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="text" placeholder="Titel" required></v-text-field>
         <div id="idImgDiv">
             <img :src="this.cover" id="idImg">
         </div>
-
-        <v-text-field v-model="this.author" @blur="getBook()" id="AddAuthor" type="text" placeholder="Autor"></v-text-field>
-        <v-text-field v-model="this.genre" id="Genre" type="text" placeholder="Genre"></v-text-field>
-        <v-text-field v-model="this.language" id="Sprache" type="text" placeholder="Sprache"></v-text-field>
-       
-
+        <v-text-field v-model="this.author" @blur="getBook()" id="AddAuthor" :rules="[v=>!!v|| 'Autor ist ein Pflichtfeld']" type="text" placeholder="Autor" required></v-text-field>
+        <v-text-field v-model="this.genre" id="Genre" :rules="[v=>!!v|| 'Genre ist ein Pflichtfeld']" type="text" placeholder="Genre" required></v-text-field>
+        <v-text-field v-model="this.language" id="Sprache" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="text" placeholder="Sprache" required></v-text-field>
         <form action="upload" id="Bild">
             <v-file-input label="Bild Hochladen" prepend-icon="mdi-camera" accept="image/png, image/jpeg, image/bmp"
                 variant="underlined" :disabled="this.showUpload"></v-file-input>
         </form>
-        <v-text-field v-model="this.isbn" @blur="getCoverByISBN()" id="ISBN" type="number" min="0" step="1"
-            placeholder="ISBN-13"></v-text-field>
-        <v-text-field v-model="this.releaseYear" id="Erscheinungsjahr" type="number" min="0" step="1"
-            placeholder="Erscheinungsjahr"></v-text-field>
-     <v-text-field v-model="this.pages" id="Seitenzahl" type="number" min="0" step="1" placeholder="Seitenanzahn"></v-text-field>
+        <v-text-field v-model="this.isbn" @blur="getCoverByISBN()" id="ISBN" :rules="[v=>!!v|| 'ISBN ist ein Pflichtfeld']" type="number" min="0" step="1"
+            placeholder="ISBN-13" required></v-text-field>
+            <v-textarea v-model="this.description" id="Beschreibung" :rules="[v=>!!v|| 'Beschreibung ist ein Pflichtfeld']" type="text" placeholder="Beschreibung" required></v-textarea>
+        <v-text-field v-model="this.releaseYear" id="Erscheinungsjahr" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="number" min="0" step="1"
+            placeholder="Erscheinungsjahr" required></v-text-field>
+            <div></div>
+     <v-text-field v-model="this.pages" id="Seitenzahl" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="number" min="0" step="1" placeholder="Seitenanzahn"></v-text-field>
 
-        <v-text-field v-model="this.owner" id="Sprache" type="text" placeholder="Besitzer"></v-text-field>
-        <v-textarea v-model="this.description" id="Beschreibung" type="text" placeholder="Beschreibung"></v-textarea>
+       
+        </div><!-- Buch bis Hier-->
+        <div id="idOwner">
+        <v-text-field v-model="this.owner.firstName" id="Sprache" :rules="[v=>!!v|| 'Vorname ist ein Pflichtfeld']" type="text" placeholder="Vorname"></v-text-field>
+        <v-text-field v-model="this.owner.lastName" id="Sprache" :rules="[v=>!!v|| 'Nachname ist ein Pflichtfeld']" type="text" placeholder="Nachname"></v-text-field>
+        <v-text-field v-model="this.owner.phoneNumber" id="Sprache" :rules="[v=>!!v|| 'Handynummer ist ein Pflichtfeld']" type="text" placeholder="Handynummer"></v-text-field>
+        <v-text-field v-model="this.owner.eMail" id="Sprache" :rules="[v=>!!v|| 'Email ist ein Pflichtfeld']" type="text" placeholder="E-Mail"></v-text-field>
+        </div>
+        
 
-        <div></div>
-        <v-btn @click="addBook()" id="idButton">Buch hinzufügen</v-btn>
+
+
+        <v-btn type="submit" @click="validate()" id="idButton">Buch hinzufügen</v-btn>
     </v-form>
+</div>
 </template>
   
 <script>
@@ -46,6 +58,12 @@ export default {
             pages: null,
             description: '',
             cover: this.nopic,
+            owner:{
+                firstName:'',
+                lastName:'',
+                phoneNumber:'',
+                eMail:''
+            },
             errorLable: '',
             errorShow: '',
             showUpload: true,
@@ -55,6 +73,7 @@ export default {
     },
     methods: {
         addBook() {
+            console.log("test")
             console.log(this.isbn)
             this.realNewBook(this.isbn).then(() => {
                 console.log("Hallo")
@@ -96,9 +115,8 @@ export default {
                 console.log('Buch ist bereits in der Datenbank')
                 this.errorLable = 'Buch ist bereits in der Datenbank'
                 this.errorShow = true
-                
             })
-            
+        
         },
 
         getBook() {
@@ -125,6 +143,7 @@ export default {
                                     console.log(tmpISBN)
                                 }
                             })
+
                             let tmpYear = respInfo.publishedDate.substring(0, 4)
                             try{this.isbn = tmpISBN}catch{console.log("ISBN Is not available")}
                             try{this.title = respInfo.title}catch{console.log("Title Is not available")}
@@ -160,6 +179,19 @@ export default {
                     resolve(true);})})
 
         },
+        resolveAbbreviation(){
+            return new Promise(function(resolve,reject){
+            axios.get("http://localhost:8080/books/").then(response => {
+                console.log(response.data)
+                    response.data.forEach(element => {
+                        console.log(element.isbn)
+                        if (element.isbn == tmpISBN){
+                            reject();
+                        }
+                    })
+                    resolve(true);})})
+        },
+
         getCoverByISBN() {
             this.disableErrorMSG()
             if (this.isbn != '' && this.cover == this.nopic) {
@@ -175,26 +207,27 @@ export default {
                 this.showUpload = true
             }
         },
-        titlecorrespondstoISBN() {
-            try {
-
-            } catch (error) {
-
-            }
-        },
         disableErrorMSG() {
             this.errorLable = ''
             this.errorShow = true;
         },
         clearFields(){
-            this.isbn= '',
+            this.isbn= null,
             this.title= '',
             this.author= '',
-            this.releaseYear= '',
+            this.releaseYear= null,
             this.genre= '',
             this.language= '',
             this.pages= null,
             this.description= ''
+            this.cover = this.nopic
+        },
+        async validate(){
+            const { valid } =  await this.$refs.form.validate()
+                if(valid){
+                    this.addBook()
+                }
+            
         }
     },
     mounted() {
@@ -208,28 +241,48 @@ export default {
 
 
 </script>
-  
-  
 <style>
 #AddH1 {
     white-space: pre;
     padding: 3vw;
+    color:#828282
+}
+#idDivclearAdd{
+    background-color: #2d2d2d;
+    width: 95%;
+    border-radius: 2vh;
+    margin: 1%;
+    padding: 1%;
+    
 }
 
 #Add {
-    background-color: #2d2d2d;
-    color: #828282;
+    
+    grid-template-rows: auto auto 8vh;
+    
+    justify-content: center;
+    padding: 4%;
+    
+}
+#idBuch, #idOwner{
     display: grid;
-    grid-template-columns: 40vw 40vw;
-    grid-template-rows: 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh;
-    grid-gap: 20px;
+    grid-template-columns: 50% 50%;
+    color: #828282;
+    grid-gap: 2.5vh;
     width: auto;
     height: auto;
-    padding-bottom: 1vh;
-    margin-left: 3vw;
-    justify-content: left;
+    justify-content: center;
 }
-
+#idBuch{
+    grid-template-rows: 8vh 8vh 8vh 8vh 8vh 8vh 8vh;
+    margin-bottom: 4%;
+}
+#idOwner{
+    border-top: 0.125vh solid white;
+    padding-top: 4%;
+    grid-template-rows: 8vh 8vh;
+    margin-bottom: 4%;
+}
 #idImgDiv {
     max-height: 100%;
     max-width: 100%;
@@ -240,9 +293,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
-
 #idImg {
     max-height: 100%;
     max-width: 100%;
@@ -250,31 +301,29 @@ export default {
 }
 
 #Beschreibung {
-    grid-row: 4/ 7;
+    grid-row: 5/ 7;
     grid-column: 2;
-    max-height: 120;
+   height: 29vh;
 }
 
 #errLable {
     color: red;
 
 }
-
-#Seitenzahl {
-    grid-column: 1;
-}
-
 #AddDescription {
     grid-column-start: 1;
     grid-column-end: 3;
     white-space: pre-wrap;
     overflow-y: auto;
 }
-
 #idButton {
-    max-width: 100%;
-    max-height: 100%;
-    height: 100%;
+    height: 8vh;
     width: 100%;
+    background-color: #0E639C;
+}
+#idclearAdd{
+    float: right;
+    background-color: #0E639C;
+    border-radius: 1vh;
 }
 </style>
