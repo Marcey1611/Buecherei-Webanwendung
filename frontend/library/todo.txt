@@ -13,9 +13,9 @@ Add New Book:
     Book schauen ob schon vorhanden(erledigt)
     ISBN raussuchen lassen(erledigt)
     remove Book
-    genre und Sprache autofulfill
+    sprache
     Owner Name(erledigt)
-    fehler feld
+    fehler feld (erledigt)
 Backend:
     kategorien(Frontend Add Anpassen)
     owner Hinzufügen
