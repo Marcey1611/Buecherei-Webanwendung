@@ -1,0 +1,210 @@
+#book {
+    background-color: #2d2d2d;
+    color: #828282;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 3vh;
+    display: grid;
+    grid-template-columns: 2fr 8fr 1fr;
+    grid-template-rows: 8vh 6vh 6vh;
+    height: max-content;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 2vh 2vh 0vh 0vh;
+    border-bottom: #828282 1px solid;
+    width: 100%;
+}
+
+#bookCoverspace {
+    z-index: 0;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    width: 15vh;
+    height: 20vh;
+}
+
+#bookTitle {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.borrowCountChip{
+    background-color: #0E639C;
+    color: white;
+    white-space: nowrap; /* Verhindert den Zeilenumbruch des Chips */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Fügt Ellipsis (...) hinzu, um abgeschnittenen Text anzuzeigen */
+  transition: max-width 0.5s ease; /* Fügt eine Übergangseffekt hinzu */
+  max-width: max-content;
+}
+.borrowCountChip:hover{
+    max-width: max-content;
+}
+
+#bookOwnerIcon {
+    float: right;
+    background-color: #0E639C;
+    color: white;
+    height: 5vh;
+    width: 5vw;
+}
+
+#bookAuthor {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#bookGenre {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#moreInfosChevronButton {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    text-align: center;
+    font-size: 3vh;
+    color: #828282;
+}
+
+#moreInfosChevronButton:hover {
+    color: white;
+}
+
+#moreInfosChevronButton:active {
+    color: #0E639C;
+}
+
+#bookMoreInfos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 5vh 5vh 10vh 10vh;
+    width: 100%;
+    color: #828282;
+    background-color: #2d2d2d;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 3vh;
+    padding-bottom: 1vh;
+    border-radius: 0vh 0vh 1vh 1vh;
+}
+
+#bookMoreInfosYearPagesLang {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+#bookSumTitle {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    margin-bottom: 10px;
+}
+
+#bookSummary {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    white-space: pre-wrap;
+    overflow-y: auto;
+}
+
+.bookListBorrowInputFirstName {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    padding-right: 2vw;
+    padding-top: 3vh;
+    height: 6vh;
+    color: white;
+}
+
+.bookListBorrowInputLastName {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    padding-right: 2vw;
+    padding-top: 3vh;
+    height: 6vh;
+    color: white;
+}
+
+#bookListBorrowButton {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    margin-top: 3vh;
+    height: 6vh;
+    background-color: #0E639C;
+    color: white;
+}
+
+#overlayBorrowOverlay {
+    position: fixed;
+}
+
+.overlayBorrowText {
+    text-align: center;
+    background-color: #2d2d2d;
+    color: #828282;
+    width: max-content;
+    height: max-content;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    border-radius: 1vh 1vh 1vh 1vh;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#overlayBorrorErrorMessage {
+    color: #C0321E;
+}
+
+.overlayBorrowClose {
+    float: right;
+    padding-top: 1vh;
+    padding-right: 1vw;
+    color: #828282;
+}
+
+.overlayBorrowClose:hover {
+    color: white;
+}
+
+.overlayBorrowClose:active {
+    color: #0E639C;
+}
+
+#overlayBorrowButton {
+    background-color: #0E639C;
+    color: white;
+    text-align: center;
+}
+
+#bookListHandBackButton {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    height: 6vh;
+    background-color: #0E639C;
+    color: white;
+}
