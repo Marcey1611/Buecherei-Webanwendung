@@ -1,8 +1,8 @@
 <template>
-        /*<v-sheet
+        <v-sheet
             class="mx-auto"
             width="87vw"
-            height="43vh"
+            height="50vh"
             color="#1e1e1e"
         >
             <v-slide-group
@@ -18,13 +18,13 @@
                     <v-card
                         :color="isSelected ? '#0E639C' : '#828282'"
                         class="ma-4"
-                        height="35vh"
+                        height="40vh"
                         width="15vw"
                         @click="toggle"
                     >
                         <div class="d-flex fill-height align-center justify-center">
                             <v-scale-transition>
-                                <img :src="top10books.img" alt="Werbung">
+                                <img :src="top10books[n].img" alt="Werbung">
                             </v-scale-transition>
                         </div>
                     </v-card>
