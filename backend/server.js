@@ -13,7 +13,6 @@ const axios = require("axios");
 app.use(express.json());
 app.use(cors());
 function log(req, res, next) {
-    console.log('Test');
     console.log(req.method + " Request at" + req.url);
     next();
 }
@@ -35,6 +34,7 @@ app.get('/books/search', (req, res) => {
     const maxPages=req.query.pages[1];    
     const filterAvailable=req.query.available;
     const filterYear=req.query.year;
+    const filterGenre=req.query.genre;
     const readFile = promisify(fs.readFile)
     readFile(filename, "utf8").then((data) => {
         const books = JSON.parse(data);
@@ -42,7 +42,7 @@ app.get('/books/search', (req, res) => {
         for (const item of books) {
             let tmpTitel = item.title.toLowerCase();
             let tmpAuthor = item.author.toLowerCase();
-            if((tmpTitel.includes(searchText) || tmpAuthor.includes(searchText)) && item.pages<=maxPages && item.pages>=minPages && item.available.toString()==filterAvailable && item.releaseYear>=filterYear[0] && item.releaseYear<=filterYear[1]){
+            if((tmpTitel.includes(searchText) || tmpAuthor.includes(searchText)) && item.genre.includes(filterGenre) && item.pages<=maxPages && item.pages>=minPages && item.available.toString()==filterAvailable && item.releaseYear>=filterYear[0] && item.releaseYear<=filterYear[1]){
                 if(filterLanguages!=null){
                     for(const itemLang of filterLanguages){
                         if(item.language==itemLang){
@@ -61,6 +61,35 @@ app.get('/books/search', (req, res) => {
     )
 
 });
+app.get('/books/genre', (req,res) => {
+    readFile(filename, "utf8").then((data) => {
+        const books=JSON.parse(data);
+        const genre=[];
+        for(const item of books){
+            if(!genre.includes(item.genre)){
+                genre.push(item.genre);   
+            }
+        };
+        res.json(genre);
+    }).catch((error) =>
+    console.log(error)
+)
+});
+app.get('/books/language', (req,res) => {
+    readFile(filename, "utf8").then((data) => {
+        const books=JSON.parse(data);
+        const lang=[];
+        for(const item of books){
+            if(!lang.includes(item.language)){
+                lang.push(item.language);   
+            }
+        };
+        console.log(lang);
+        res.json(lang);
+    }).catch((error) =>
+    console.log(error)
+)
+});
 
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
@@ -68,6 +97,9 @@ app.put("/books/:id", function (req, res) {
         dataAsObject[req.params.id].firstName = req.body.firstName;
         dataAsObject[req.params.id].lastName = req.body.lastName;
         dataAsObject[req.params.id].available = req.body.available;
+        if(!req.body.available){
+            dataAsObject[req.params.id].borrowCount++;
+        }
         fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
             res.writeHead(200, {
                 "Content-Type": "application/json",
@@ -92,7 +124,9 @@ app.post("/books", function (req, res) {
             available: true,
             description: req.body.description,
             firstName: req.body.firstName,
-            lastName: req.body.lastName
+            lastName: req.body.lastName,
+            owner:req.body.owner,
+            borrowCount:0
         });
         fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
             res.writeHead(200, {
@@ -123,6 +157,7 @@ function getGoogleBooks() {
                 }).then(response => {
                     element.img = response.data.items[0].volumeInfo.imageLinks.thumbnail;
                     element.description = response.data.items[0].volumeInfo.description;
+                    element.borrowCount = Math.floor((Math.random() * 10)) + 1
                     //console.log(element);
                     console.log('Success');
                 }).catch(error => {
