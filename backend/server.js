@@ -13,7 +13,6 @@ const axios = require("axios");
 app.use(express.json());
 app.use(cors());
 function log(req, res, next) {
-    console.log('Test');
     console.log(req.method + " Request at" + req.url);
     next();
 }
@@ -29,12 +28,11 @@ app.get("/books", function (req, res) {
 });
 app.get('/books/search', (req, res) => {
     const searchText = req.query.searchText.toLowerCase();
-    console.log(req.query);
-    const filterLanguages=req.query.languages;
-    const minPages=req.query.pages[0];
-    const maxPages=req.query.pages[1];    
-    const filterAvailable=req.query.available;
-    const filterYear=req.query.year;
+    const filterLanguages = req.query.languages;
+    const minPages = req.query.pages[0];
+    const maxPages = req.query.pages[1];
+    const filterAvailable = req.query.available;
+    const filterYear = req.query.year;
     const readFile = promisify(fs.readFile)
     readFile(filename, "utf8").then((data) => {
         const books = JSON.parse(data);
@@ -42,17 +40,17 @@ app.get('/books/search', (req, res) => {
         for (const item of books) {
             let tmpTitel = item.title.toLowerCase();
             let tmpAuthor = item.author.toLowerCase();
-            if((tmpTitel.includes(searchText) || tmpAuthor.includes(searchText)) && item.pages<=maxPages && item.pages>=minPages && item.available.toString()==filterAvailable && item.releaseYear>=filterYear[0] && item.releaseYear<=filterYear[1]){
-                if(filterLanguages!=null){
-                    for(const itemLang of filterLanguages){
-                        if(item.language==itemLang){
+            if ((tmpTitel.includes(searchText) || tmpAuthor.includes(searchText)) && item.pages <= maxPages && item.pages >= minPages && item.available.toString() == filterAvailable && item.releaseYear >= filterYear[0] && item.releaseYear <= filterYear[1]) {
+                if (filterLanguages != null) {
+                    for (const itemLang of filterLanguages) {
+                        if (item.language == itemLang) {
                             tmp.push(item);
                         }
                     }
-                }else{
+                } else {
                     tmp.push(item);
                 }
-                    
+
             };
         };
         res.json(tmp)
@@ -68,6 +66,9 @@ app.put("/books/:id", function (req, res) {
         dataAsObject[req.params.id].firstName = req.body.firstName;
         dataAsObject[req.params.id].lastName = req.body.lastName;
         dataAsObject[req.params.id].available = req.body.available;
+        if(!dataAsObject[req.params.id].available){
+            dataAsObject[req.params.id].borrowCount++;
+        }
         fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
             res.writeHead(200, {
                 "Content-Type": "application/json",
@@ -129,7 +130,7 @@ function getGoogleBooks() {
                     console.log('Error');
                     console.log('Error from Google or Exhausted');
                     try {
-                        element.img = 'https://covers.openlibrary.org/b/isbn/'+ element.isbn+'-L.jpg'
+                        element.img = 'https://covers.openlibrary.org/b/isbn/' + element.isbn + '-L.jpg'
                     } catch (error) {
                         console.log('Error from 2. Api')
                     }
