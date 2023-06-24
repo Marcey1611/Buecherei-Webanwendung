@@ -1,20 +1,15 @@
 <template>
   <main>  
-    <Home></Home>
+    <h1>Top-10</h1>
   </main>
 </template>
 
 <script>
-  import Home from '../components/Home.vue';
-  export default {
-    components: {
-      Home
-    },}
+
 </script>
 
 <style>
-  main{
-    width: 100vw;
-    height: 100vh;
+  h1{
+    white-space: pre;
   }
 </style>
