@@ -1,4 +1,5 @@
 <template>
+        <h1 id="title">Top 10 Bücher</h1>
         <v-sheet
             class="mx-auto"
             width="87vw"
@@ -11,8 +12,8 @@
                 center-active
             >
                 <v-slide-group-item
-                    v-for="n in 10"
-                    :key="n"
+                    v-for="book in this.top10books"
+                    :key="book"
                     v-slot="{ isSelected, toggle }"
                 >
                     <v-card
@@ -24,7 +25,8 @@
                     >
                         <div class="d-flex fill-height align-center justify-center">
                             <v-scale-transition>
-                                <img :src="top10books[n].img" alt="Werbung">
+                                <img id="cover" :src="book.img" alt="Werbung">
+                                <h1>1</h1>
                             </v-scale-transition>
                         </div>
                     </v-card>
@@ -37,35 +39,33 @@
     import axios from 'axios';
     export default {
         data: () => ({
-            bookPosition: 0,
-            currentBorrowCounter: 0,
             model: null,
+            topanzeige: [],
             books: [],
             top10books: [],
-            count: 0,
         }),
         methods: {
             async getBookCover(){
                 const response = await axios.get('http://localhost:8080/books');
                 this.books = response.data;
-                console.log(this.books);
-                const length = this.books.length;
-                console.log(length);
-                for(let i=0; i<10; i++){
+                let length = this.books.length;
+                let pos = 0;
+                let len = 10;
+                if(length < 10){
+                    len = length;
+                }
+                for(let i=0; i<len; i++){
+                    this.topanzeige[i] = "Top"
                     for(let n=0; n<length; n++){
-                        console.log(this.books[n].borrowCount);
-                        console.log(typeof(this.books[n].borrowCount));
-                        this.count = this.books[n].borrowCount;
-                        if(this.count > this.currentBorrowCounter){
-                            this.bookPosition = n;
-                            this.currentBorrowCounter = this.count;
+                        if(this.books[n].borrowCount > this.books[pos].borrowCount){
+                            pos = n;
                         }
                     }
-                    this.currentBorrowCounter = 0;
-                    this.top10books.push(this.books[this.bookPosition]);
-                    this.books.splice(this.bookPosition, 1);
+                    this.top10books.push(this.books[pos]);
+                    this.books.splice(pos, 1);
+                    pos = 0;
+                    length--;
                 }
-                console.log("Top 10" + this.top10books);
             }
         },
         mounted() {
@@ -75,4 +75,12 @@
 </script>
 
 <style>
+    #title{
+        margin-left: 10vw;
+        color: #828282;
+    }
+    #cover{
+        width: 20vw;
+        height: 40vh;
+    }
 </style>
