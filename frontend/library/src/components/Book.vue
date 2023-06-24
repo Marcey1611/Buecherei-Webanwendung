@@ -1,291 +1,89 @@
-
 <template>
-  <div id="book">
-    <div id="bookCoverspace">
-      <img id="bookCover" :src="book.img" alt="" style="max-width: 100%;max-height: 100%;">
+  <div id="Book">
+    <div id="BookCoverspace">
+      <img id="BookCover" :src="book.img" alt="" style="max-width: 100%;max-height: 100%;">
     </div>
-    <h1 id="bookTitle">{{ book.title }}</h1>
-    <div>
-      <v-btn id="bookOwnerIcon">
-        <v-icon>mdi-account</v-icon>
-        <v-tooltip activator="parent" location="start">
-          <div>
-            <h3>{{ book.owner.firstName }}</h3>
-            <h4>{{ book.owner.phoneNumber }}</h4>
-            <h4>{{ book.owner.eMail }}</h4>
-          </div>
-        </v-tooltip>
-      </v-btn>
-    </div>
-    <h2 id="bookAuthor">{{ book.author }}</h2>
-    <h3 id="bookGenre">Genre: {{ book.genre }}</h3>
-    <div id="moreInfosChevronButton">
-      <v-icon :icon="showMoreInfos ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-        @click="showMoreInfos = !showMoreInfos"></v-icon>
-    </div>
+    <h2 id="BookTitle">{{ book.title }}</h2>
+    <h3 id="BookAuthor">{{ book.author }}</h3>
+    <h3 id="BookReleaseYear">Erscheinungsjahr: {{ book.releaseYear }}</h3>
+    <h3 id="BookSumTitle">Zusammenfassung: </h3>
+    <div id="BookSummary">{{ book.description }}</div>
   </div>
-  <v-expand-transition>
-    <div v-if="showMoreInfos" id="bookMoreInfos">
-      <div id="bookMoreInfosYearPagesLang">
-        <h3>Das Buch wurde {{ book.releaseYear }} mit {{ book.pages }} Seiten auf 
-          {{ book.language }} veröffentlicht.</h3>
-      </div>
-      <h3 id="bookSumTitle">Zusammenfassung: </h3>
-      <div id="bookSummary">{{ book.description }}</div>
-      <v-text-field class="bookListBorrowInputFirstName" v-if="book.available" 
-        type="text" placeholder="Vorname"
-        v-model="book.firstName"></v-text-field>
-      <v-text-field class="bookListBorrowInputLastName" v-if="book.available" 
-        type="text" placeholder="Nachname"
-        v-model="book.lastName"></v-text-field>
-      <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData">
-        Ausleihen</v-btn>
-      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained 
-        class="align-center justify-center">
-        <div>
-<!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
-          <v-icon class="overlayBorrowClose" @click="overlayBorrowError = false">mdi-close
-            </v-icon>
-          <div class="overlayBorrowText">
-            <h3 id="overlayBorrorErrorMessage">Bitte gib eine gültigen Vorname und 
-              Nachnamen ein!</h3>
-          </div>
-        </div>
-      </v-overlay>
-      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrow" contained 
-        class="align-center justify-center">
-        <div>
-          <v-icon class="overlayBorrowClose" @click="overlayBorrow = false">mdi-close
-            </v-icon>
-          <div class="overlayBorrowText">
-            <h3>Weiterse Vorgehen:</h3>
-            <br>
-            <h4>Herzlichen Glückwunsch!</h4>
-            <p>Du hast soeben das Buch {{ book.title }} von {{ book.author }} ausgeliehen.</p>
-            <p>Jetzt kannst du dich bei seinem Besitzer {{ book.owner.firstName }} {{ book.owner.lastName }} unter den
-              folgenden Kontaktdaten melden.
-            </p>
-            <br>
-            <p>Kontaktdaten:</p>
-            <p>Handynummer des Besitzers: {{ book.owner.phoneNumber }}</p>
-            <p>E-Mail des Besitzers: {{ book.owner.eMail }}</p>
-            <br>
-            <h4>Um den Vorgang abzuschließen und um zu bestätigen das du das Buch sicher ausleihen möchtest,</h4>
-            <h4>klicke auf den Button unten, du gelangst so zur Bücherliste zurück</h4>
-            <br><v-btn id="overlayBorrowButton" @click="borrow(book)">Bestätigen</v-btn>
-          </div>
-        </div>
-      </v-overlay>
-      <v-btn id="bookListHandBackButton" v-if="!book.available" @click="handback(book)">Zurückgeben
-      </v-btn>
-    </div>
-  </v-expand-transition>
 </template>
 
 <script>
-var buchstabenRegEx = /^[A-Za-z]+$/;
 export default {
-  data() {
-    return {
-      show: false,
-      overlayBorrow: false,
-      overlayBorrowError: false,
-      showMoreInfos: false
-    };
-  },
   props: ['book'],
-  methods: {
-    borrow: function (book) {
-      this.overlayBorrow = false;
-      this.$emit("borrow", this.book);
-    },
-    handback: function (book) {
-      this.$emit("handback", this.book);
-    },
-    validateBorrowData() {
-      if (buchstabenRegEx.test(this.book.firstName)) {
-        this.overlayBorrow = true;
-      } else {
-        this.overlayBorrowError = true;
-      }
-
-    }
-  }
 };
 </script>
 
 <style>
-#book {
+#Book {
   background-color: #2d2d2d;
   color: #828282;
   padding-left: 1vw;
-  padding-right: 1vw;
   padding-top: 1vh;
-  padding-bottom: 3vh;
   display: grid;
-  grid-template-columns: 2fr 8fr 1fr;
-  grid-template-rows: 8vh 6vh 6vh;
-  height: max-content;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 2vh 2vh 0vh 0vh;
-  border-bottom: #828282 1px solid;
-  width: 100%;
+  grid-template-columns: 20vw 50vw;
+  grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh 5vh;
+  width: 82vw;
+  height: 32vh;
+  justify-content: left;
 }
-#bookCoverspace {
+
+#BookCoverspace {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
-  grid-row-end: 4;
-  width: 15vh;
-  height: 20vh;
+  grid-row-end: 7;
+  width: 20vw;
+  height: 30vh;
 }
-#bookTitle {
+
+#BookTitle {
   grid-column-start: 2;
-  grid-column-end: 4;
+  grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-}
-#bookOwnerIcon {
-  float: right;
-  background-color: #0E639C;
-  color: white;
-  height: 5vh;
-  width: 5vw;
-}
-#bookAuthor {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-#bookGenre {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 4;
-}
-#moreInfosChevronButton {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  text-align: center;
-  font-size: 3vh;
-  color: #828282;
-}
-#moreInfosChevronButton:hover {
-  color: white;
-}
-#moreInfosChevronButton:active {
-  color: #0E639C;
-}
-#bookMoreInfos {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 5vh 5vh 10vh 10vh;
-  width: 100%;
-  color: #828282;
-  background-color: #2d2d2d;
+  padding-top: 1vh;
   padding-left: 1vw;
-  padding-right: 1vw;
-  padding-top: 3vh;
-  padding-bottom: 1vh;
-  border-radius: 0vh 0vh 1vh 1vh;
 }
-#bookMoreInfosYearPagesLang {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-#bookSumTitle {
-  grid-column-start: 1;
-  grid-column-end: 4;
+
+#BookAuthor {
+  grid-column-start: 2;
+  grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
-  margin-bottom: 10px;
+  padding-top: 1vh;
+  padding-left: 1vw;
 }
-#bookSummary {
-  grid-column-start: 1;
-  grid-column-end: 4;
+
+#BookReleaseYear {
+  grid-column-start: 2;
+  grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 4;
-  white-space: pre-wrap;
-  overflow-y: auto;
+  padding-top: 1vh;
+  padding-left: 1vw;
 }
-.bookListBorrowInputFirstName {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  padding-right: 2vw;
-  padding-top: 3vh;
-  height: 6vh;
-  color: white;
-}
-.bookListBorrowInputLastName {
+
+#BookSumTitle {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 5;
-  padding-right: 2vw;
-  padding-top: 3vh;
-  height: 6vh;
-  color: white;
-}
-#bookListBorrowButton {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  margin-top: 3vh;
-  height: 6vh;
-  background-color: #0E639C;
-  color: white;
-}
-#overlayBorrowOverlay {
-  position: fixed;
-}
-.overlayBorrowText {
-  text-align: center;
-  background-color: #2d2d2d;
-  color: #828282;
-  width: max-content;
-  height: max-content;
   padding-top: 1vh;
-  padding-bottom: 1vh;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  border-radius: 1vh 1vh 1vh 1vh;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+  padding-left: 1vw;
 }
-#overlayBorrorErrorMessage {
-  color: #C0321E;
-}
-.overlayBorrowClose {
-  float: right;
-  padding-top: 1vh;
-  padding-right: 1vw;
-  color: #828282;
-}
-.overlayBorrowClose:hover {
-  color: white;
-}
-.overlayBorrowClose:active {
-  color: #0E639C;
-}
-#overlayBorrowButton {
-  background-color: #0E639C;
-  color: white;
-  text-align: center;
-}
-#bookListHandBackButton {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  height: 6vh;
-  background-color: #0E639C;
-  color: white;
+
+#BookSummary {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 7;
+  width: 60vw;
+  padding-left: 1vw;
+  white-space: pre-wrap;
+  overflow-y: auto;
 }
 </style>

@@ -1,25 +1,21 @@
 Home:
+    Zuletzt ausgeliehen Bücher
     Top-10(Top-5)
     Higlight (highlight)
-    überganng(erledigt)
+    überganng
     Sidebar einklappen lassen (erledigt)
 Books:
     Suche Groß und klein schreibung (erledigt)
     zusammenfassung raussuchen lassen (erledigt)
     Filter
+    (maybe)autofullfill search
     autofullfill genre
-    sprache
 Add New Book:
-    Book schauen ob schon vorhanden(erledigt)
+    Book schauen ob schon vorhanden
     ISBN raussuchen lassen(erledigt)
     remove Book
-    sprache
-    Owner Name(erledigt)
-    fehler feld (erledigt)
+    genre und Sprache autofulfill
 Backend:
     kategorien(Frontend Add Anpassen)
-    owner Hinzufügen
 Gesammt:
     Kommentare
-    clean Code
-    textFelder (Anpassen)
