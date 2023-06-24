@@ -33,13 +33,16 @@
 }
 
 .borrowCountChip{
+    z-index: 1;
     background-color: #0E639C;
     color: white;
-    white-space: nowrap; /* Verhindert den Zeilenumbruch des Chips */
-  overflow: hidden;
-  text-overflow: ellipsis; /* Fügt Ellipsis (...) hinzu, um abgeschnittenen Text anzuzeigen */
-  transition: max-width 0.5s ease; /* Fügt eine Übergangseffekt hinzu */
-  max-width: max-content;
+    margin-left: -1vw;
+    margin-bottom: -3vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: max-width 0.5s ease;
+    max-width: max-content;
 }
 .borrowCountChip:hover{
     max-width: max-content;

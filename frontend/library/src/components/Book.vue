@@ -91,8 +91,8 @@ export default {
       overlayBorrow: false,
       overlayBorrowError: false,
       showMoreInfos: false,
-      text: '9x ausgeliehen',
-      truncatedText: '9x',
+      text: this.book.borrowCount+'x ausgeliehen',
+      truncatedText: this.book.borrowCount+'x',
       showFullText: false
     };
   },
