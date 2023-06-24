@@ -1,5 +1,5 @@
 <template>
-        <v-sheet
+        /*<v-sheet
             class="mx-auto"
             width="87vw"
             height="43vh"
@@ -24,7 +24,7 @@
                     >
                         <div class="d-flex fill-height align-center justify-center">
                             <v-scale-transition>
-                                <img :src="books.img" alt="">
+                                <img :src="top10books.img" alt="Werbung">
                             </v-scale-transition>
                         </div>
                     </v-card>
@@ -38,30 +38,34 @@
     export default {
         data: () => ({
             bookPosition: 0,
-            counter: 0,
             currentBorrowCounter: 0,
             model: null,
             books: [],
             top10books: [],
+            count: 0,
         }),
         methods: {
             async getBookCover(){
-                const response = await axios.get('http://localhost:8080/books')
-                this.books = response.data
-                console.log("Books Array" + this.books)
-                for(n in 10){
-                    for(book in books){
-                        if(book.borrowCounter > this.currentBorrowCounter){
-                            this.bookPosition = counter
+                const response = await axios.get('http://localhost:8080/books');
+                this.books = response.data;
+                console.log(this.books);
+                const length = this.books.length;
+                console.log(length);
+                for(let i=0; i<10; i++){
+                    for(let n=0; n<length; n++){
+                        console.log(this.books[n].borrowCount);
+                        console.log(typeof(this.books[n].borrowCount));
+                        this.count = this.books[n].borrowCount;
+                        if(this.count > this.currentBorrowCounter){
+                            this.bookPosition = n;
+                            this.currentBorrowCounter = this.count;
                         }
-                        counter++
                     }
-                    this.currentBorrowCounter = 0
-                    this.top10books.push(books[this.bookPosition])
-                    this.books.splice(this.bookPosition, 1)
+                    this.currentBorrowCounter = 0;
+                    this.top10books.push(this.books[this.bookPosition]);
+                    this.books.splice(this.bookPosition, 1);
                 }
-                console.log("Top 10" + this.top10books)
-
+                console.log("Top 10" + this.top10books);
             }
         },
         mounted() {
