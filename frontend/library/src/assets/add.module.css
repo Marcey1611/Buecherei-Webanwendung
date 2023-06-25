@@ -63,6 +63,8 @@
 }
 #idclearAdd{
     float: right;
+    width: 4vh;
+    height: 4vh;
     background-color: #0E639C;
     border-radius: 1vh;
 }

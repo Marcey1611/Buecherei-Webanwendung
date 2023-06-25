@@ -4,6 +4,7 @@ const fs = require("fs");
 const cors = require("cors");
 const port = 8080;
 const filename = __dirname + "/books.json";
+const file_languages = __dirname +"/languages.json";
 const { promisify } = require('util');
 const { readFile } = require("fs/promises");
 const { error } = require("console");
@@ -90,36 +91,20 @@ app.get('/books/language', (req,res) => {
     console.log(error)
 )
 });
-
-app.get('/books/genre', (req,res) => {
-    readFile(filename, "utf8").then((data) => {
-        const books=JSON.parse(data);
-        const genre=[];
-        for(const item of books){
-            if(!genre.includes(item.genre)){
-                genre.push(item.genre);
+app.get('/books/resolveLanguage', (req,res)=> {
+    let text = req.query.reqText;
+    fs.readFile(file_languages, "utf8", function (err, data) {
+        const arrayLang = JSON.parse(data)
+        tmptranslation = "";
+        for(let i = 0; i < arrayLang.length;i++){
+            if(arrayLang[i].Abkürzung == text){
+                tmptranslation = arrayLang[i].Sprache
+                console.log(tmptranslation)
             }
-        };
-        res.json(genre);
-    }).catch((error) =>
-    console.log(error)
-)
-});
-app.get('/books/language', (req,res) => {
-    readFile(filename, "utf8").then((data) => {
-        const books=JSON.parse(data);
-        const lang=[];
-        for(const item of books){
-            if(!lang.includes(item.language)){
-                lang.push(item.language);
-            }
-        };
-        console.log(lang);
-        res.json(lang);
-    }).catch((error) =>
-    console.log(error)
-)
-});
+        }
+        res.end(tmptranslation)
+    });
+})
 
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
