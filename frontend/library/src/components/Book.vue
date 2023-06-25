@@ -1,12 +1,14 @@
-
+<!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
 <template>
-  
+  <!-- Buch normale Ansicht -->
   <div id="book">
-    
     <div id="bookCoverspace">
       <div>
-      <v-chip class="borrowCountChip" color="#ffffff" :style="{ backgroundColor: '#0E639C' }" v-tooltip="{ content: text }" @mouseover="showFullText = true" @mouseout="showFullText = false">
-      {{showFullText ? text : truncatedText }}</v-chip></div>
+        <v-chip class="borrowCountChip" color="#ffffff" :style="{ backgroundColor: '#0E639C' }" 
+          v-tooltip="{ content: text }" @mouseover="showFullText = true" 
+          @mouseout="showFullText = false"> {{ showFullText ? text : truncatedText }}
+        </v-chip>
+      </div>
       <img id="bookCover" :src="book.img" alt="" style="max-width: 100%;max-height: 100%;">
     </div>
     <h1 id="bookTitle">{{ book.title }}</h1>
@@ -29,6 +31,7 @@
         @click="showMoreInfos = !showMoreInfos"></v-icon>
     </div>
   </div>
+  <!-- Buch Weitere Infos Bereich -->
   <v-expand-transition>
     <div v-if="showMoreInfos" id="bookMoreInfos">
       <div id="bookMoreInfosYearPagesLang">
@@ -37,15 +40,16 @@
       </div>
       <h3 id="bookSumTitle">Zusammenfassung: </h3>
       <div id="bookSummary">{{ book.description }}</div>
-      <v-text-field class="bookListBorrowInputFirstName" v-if="book.available" type="text" placeholder="Vorname"
-        v-model="book.firstName"></v-text-field>
-      <v-text-field class="bookListBorrowInputLastName" v-if="book.available" type="text" placeholder="Nachname"
-        v-model="book.lastName"></v-text-field>
+      <!-- Ausleihen Leiste -->
+      <v-text-field class="bookListBorrowInputFirstName" v-if="book.available" type="text" 
+        placeholder="Vorname" v-model="book.firstName"></v-text-field>
+      <v-text-field class="bookListBorrowInputLastName" v-if="book.available" type="text" 
+        placeholder="Nachname" v-model="book.lastName"></v-text-field>
       <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData()">
         Ausleihen</v-btn>
-      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained class="align-center justify-center">
+      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained 
+        class="align-center justify-center">
         <div>
-          <!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
           <v-icon class="overlayBorrowClose" @click="overlayBorrowError = false">mdi-close
           </v-icon>
           <div class="overlayBorrowText">
@@ -54,7 +58,8 @@
           </div>
         </div>
       </v-overlay>
-      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrow" contained class="align-center justify-center">
+      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrow" contained 
+        class="align-center justify-center">
         <div>
           <v-icon class="overlayBorrowClose" @click="overlayBorrow = false">mdi-close
           </v-icon>
@@ -62,7 +67,8 @@
             <h3>Weiterse Vorgehen:</h3>
             <br>
             <h4>Herzlichen Glückwunsch!</h4>
-            <p>Du hast soeben das Buch {{ book.title }} von {{ book.author }} ausgeliehen.</p>
+            <p>Du hast soeben das Buch {{ book.title }} von {{ book.author }} ausgeliehen.
+              </p>
             <p>Jetzt kannst du dich bei seinem Besitzer {{ book.owner.firstName }}
               {{ book.owner.lastName }} unter den folgenden Kontaktdaten melden.
             </p>
@@ -79,8 +85,8 @@
           </div>
         </div>
       </v-overlay>
-      <v-btn id="bookListHandBackButton" v-if="!book.available" @click="handback(book)">Zurückgeben
-      </v-btn>
+      <v-btn id="bookListHandBackButton" v-if="!book.available" @click="handback(book)">
+        Zurückgeben</v-btn>
     </div>
   </v-expand-transition>
 </template>
@@ -108,11 +114,11 @@ export default {
     }
   },
   methods: {
-    borrow(){
+    borrow() {
       this.overlayBorrow = false;
       this.$emit("borrow", this.book);
     },
-    handback(){
+    handback() {
       this.$emit("handback", this.book);
     },
     validateBorrowData() {
@@ -120,13 +126,12 @@ export default {
       if (buchstabenRegEx.test(this.book.firstName)) {
         this.overlayBorrow = true;
       } else {
-         this.overlayBorrowError = true;
-       }
+        this.overlayBorrowError = true;
+      }
     }
   },
 };
 </script>
 
 <style>
-@import "../assets/book.module.css";
-</style>
+@import "../assets/book.module.css";</style>
