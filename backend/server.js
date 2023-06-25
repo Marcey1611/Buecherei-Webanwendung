@@ -27,6 +27,7 @@ app.get("/books", function (req, res) {
         res.end(data);
     });
 });
+
 app.get('/books/search', (req, res) => {
     const searchText = req.query.searchText.toLowerCase();
     console.log(req.query);
@@ -62,10 +63,12 @@ app.get('/books/search', (req, res) => {
     )
 
 });
+
 app.get('/books/genre', (req,res) => {
     readFile(filename, "utf8").then((data) => {
         const books=JSON.parse(data);
         const genre=[];
+
         for(const item of books){
             if(!genre.includes(item.genre)){
                 genre.push(item.genre);   
@@ -76,10 +79,12 @@ app.get('/books/genre', (req,res) => {
     console.log(error)
 )
 });
+
 app.get('/books/language', (req,res) => {
     readFile(filename, "utf8").then((data) => {
         const books=JSON.parse(data);
         const lang=[];
+
         for(const item of books){
             if(!lang.includes(item.language)){
                 lang.push(item.language);   
@@ -91,20 +96,21 @@ app.get('/books/language', (req,res) => {
     console.log(error)
 )
 });
+
 app.get('/books/resolveLanguage', (req,res)=> {
     let text = req.query.reqText;
     fs.readFile(file_languages, "utf8", function (err, data) {
         const arrayLang = JSON.parse(data)
         tmptranslation = "";
+
         for(let i = 0; i < arrayLang.length;i++){
             if(arrayLang[i].Abkürzung == text){
                 tmptranslation = arrayLang[i].Sprache
-                console.log(tmptranslation)
             }
         }
         res.end(tmptranslation)
     });
-})
+});
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
@@ -114,14 +120,10 @@ app.put("/books/:id", function (req, res) {
         if(!req.body.available){
             dataAsObject[req.params.id].borrowCount++;
         }
-        fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
-            res.writeHead(200, {
-                "Content-Type": "application/json",
-            });
-            res.end(JSON.stringify(dataAsObject));
-        });
+        fsWriteFile(dataAsObject);
     });
 });
+
 app.post("/books", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
@@ -142,14 +144,10 @@ app.post("/books", function (req, res) {
             owner:req.body.owner,
             borrowCount:0
         });
-        fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
-            res.writeHead(200, {
-                "Content-Type": "application/json",
-            });
-            res.end(JSON.stringify(dataAsObject));
-        });
+        fsWriteFile(dataAsObject);
     });
 })
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}!`)
     getGoogleBooks()
@@ -157,7 +155,6 @@ app.listen(port, () => {
 function getGoogleBooks() {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataArray = JSON.parse(data);
-        //console.log(dataArray);
         let promises = [];
 
         dataArray.forEach(element => {
@@ -172,7 +169,6 @@ function getGoogleBooks() {
                     element.img = response.data.items[0].volumeInfo.imageLinks.thumbnail;
                     element.description = response.data.items[0].volumeInfo.description;
                     element.borrowCount = Math.floor((Math.random() * 10)) + 1
-                    console.log('Success');
                 }).catch(error => {
                     console.log('Error from Google or Exhausted');
                     try {
@@ -204,5 +200,13 @@ function getGoogleBooks() {
                 console.log('Error');
                 console.log(error);
             });
+    });
+}
+function fsWriteFile(data) {
+    fs.writeFile(filename, JSON.stringify(data), () => {
+        res.writeHead(200, {
+            "Content-Type": "application/json",
+        });
+        res.end(JSON.stringify(dataAsObject));
     });
 }
