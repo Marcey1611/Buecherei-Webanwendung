@@ -11,14 +11,9 @@
             <v-text-field v-model="this.author" label="Author" @blur="getBook()" id="AddAuthor" :rules="[v=>!!v|| 'Autor ist ein Pflichtfeld']" type="text" required></v-text-field>
             <v-text-field v-model="this.genre" label="Genre" id="Genre" :rules="[v=>!!v|| 'Genre ist ein Pflichtfeld']" type="text"  required></v-text-field>
             <v-text-field v-model="this.language" label="Sprache" @blur="this.resolveAbbreviation()" id="Sprache" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="text"  required></v-text-field>
-            <form action="upload" id="Bild">
-                <v-file-input label="Bild Hochladen" prepend-icon="mdi-camera" accept="image/png, image/jpeg, image/bmp"
-                    variant="underlined" :disabled="this.showUpload"></v-file-input>
-            </form>
             <v-text-field v-model="this.isbn" label="IBN" @blur="getCoverByISBN()" id="ISBN" :rules="[v=>!!v|| 'ISBN ist ein Pflichtfeld']" type="number" min="0" step="1" required></v-text-field>
-                <v-textarea v-model="this.description" label="Beschreibung" id="Beschreibung" :rules="[v=>!!v|| 'Beschreibung ist ein Pflichtfeld']" type="text"  required></v-textarea>
             <v-text-field v-model="this.releaseYear" label="Erscheinungsjahr" id="Erscheinungsjahr" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="number" min="0" step="1" required></v-text-field>
-                <div></div>
+            <v-textarea v-model="this.description" label="Beschreibung" id="Beschreibung" :rules="[v=>!!v|| 'Beschreibung ist ein Pflichtfeld']" type="text"  required></v-textarea>
         <v-text-field v-model="this.pages" label="Seitenzahl" id="Seitenzahl" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="number" min="0" step="1" ></v-text-field>
             </div><!-- Buch bis Hier-->
             <div id="idOwner">
