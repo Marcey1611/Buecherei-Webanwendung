@@ -62,6 +62,36 @@ app.get('/books/search', (req, res) => {
 
 });
 
+app.get('/books/genre', (req,res) => {
+    readFile(filename, "utf8").then((data) => {
+        const books=JSON.parse(data);
+        const genre=[];
+        for(const item of books){
+            if(!genre.includes(item.genre)){
+                genre.push(item.genre);
+            }
+        };
+        res.json(genre);
+    }).catch((error) =>
+    console.log(error)
+)
+});
+app.get('/books/language', (req,res) => {
+    readFile(filename, "utf8").then((data) => {
+        const books=JSON.parse(data);
+        const lang=[];
+        for(const item of books){
+            if(!lang.includes(item.language)){
+                lang.push(item.language);
+            }
+        };
+        console.log(lang);
+        res.json(lang);
+    }).catch((error) =>
+    console.log(error)
+)
+});
+
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
