@@ -1,4 +1,4 @@
-
+<!-- test -->
 <template>
   <div id="book">
     <div id="bookCoverspace">
