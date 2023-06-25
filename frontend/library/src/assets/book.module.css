@@ -16,6 +16,7 @@
 }
 
 #bookCoverspace {
+    margin-top: -2vh;
     z-index: 0;
     grid-column-start: 1;
     grid-column-end: 2;
@@ -32,12 +33,12 @@
     grid-row-end: 2;
 }
 
+
 .borrowCountChip{
-    z-index: 1;
+    margin-top: -1vh;
     background-color: #0E639C;
     color: white;
-    margin-left: -1vw;
-    margin-bottom: -3vh;
+    margin-left: -2vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
