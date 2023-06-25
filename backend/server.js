@@ -49,10 +49,10 @@ app.get('/books/search', (req, res) => {
                             tmp.push(item);
                         }
                     }
-                }else{
+                } else {
                     tmp.push(item);
                 }
-                    
+
             };
         };
         res.json(tmp)
@@ -194,7 +194,7 @@ function getGoogleBooks() {
                     console.log('Error');
                     console.log('Error from Google or Exhausted');
                     try {
-                        element.img = 'https://covers.openlibrary.org/b/isbn/'+ element.isbn+'-L.jpg'
+                        element.img = 'https://covers.openlibrary.org/b/isbn/' + element.isbn + '-L.jpg'
                     } catch (error) {
                         console.log('Error from 2. Api')
                     }
