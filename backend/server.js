@@ -105,7 +105,6 @@ app.get('/books/resolveLanguage', (req,res)=> {
         res.end(tmptranslation)
     });
 })
-
 app.put("/books/:id", function (req, res) {
     fs.readFile(filename, "utf8", function (err, data) {
         let dataAsObject = JSON.parse(data);
@@ -173,10 +172,8 @@ function getGoogleBooks() {
                     element.img = response.data.items[0].volumeInfo.imageLinks.thumbnail;
                     element.description = response.data.items[0].volumeInfo.description;
                     element.borrowCount = Math.floor((Math.random() * 10)) + 1
-                    //console.log(element);
                     console.log('Success');
                 }).catch(error => {
-                    console.log('Error');
                     console.log('Error from Google or Exhausted');
                     try {
                         element.img = 'https://covers.openlibrary.org/b/isbn/' + element.isbn + '-L.jpg'
