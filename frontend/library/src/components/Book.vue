@@ -1,9 +1,12 @@
+
 <template>
-  <v-chip class="borrowCountChip" v-tooltip="{ content: text }" @mouseover="showFullText = true" @mouseout="showFullText = false">
-    {{showFullText ? text : truncatedText }}</v-chip>
+  
   <div id="book">
     
     <div id="bookCoverspace">
+      <div>
+      <v-chip class="borrowCountChip" color="#ffffff" :style="{ backgroundColor: '#0E639C' }" v-tooltip="{ content: text }" @mouseover="showFullText = true" @mouseout="showFullText = false">
+      {{showFullText ? text : truncatedText }}</v-chip></div>
       <img id="bookCover" :src="book.img" alt="" style="max-width: 100%;max-height: 100%;">
     </div>
     <h1 id="bookTitle">{{ book.title }}</h1>
@@ -38,7 +41,7 @@
         v-model="book.firstName"></v-text-field>
       <v-text-field class="bookListBorrowInputLastName" v-if="book.available" type="text" placeholder="Nachname"
         v-model="book.lastName"></v-text-field>
-      <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData">
+      <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData()">
         Ausleihen</v-btn>
       <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained class="align-center justify-center">
         <div>
@@ -91,27 +94,34 @@ export default {
       overlayBorrow: false,
       overlayBorrowError: false,
       showMoreInfos: false,
-      text: this.book.borrowCount+'x ausgeliehen',
-      truncatedText: this.book.borrowCount+'x',
       showFullText: false
     };
   },
+  emits: ['borrow', 'handback'],
   props: ['book'],
+  computed: {
+    text() {
+      return this.book.borrowCount + 'x ausgeliehen';
+    },
+    truncatedText() {
+      return this.book.borrowCount + 'x';
+    }
+  },
   methods: {
-    borrow: function (book) {
+    borrow(){
       this.overlayBorrow = false;
       this.$emit("borrow", this.book);
     },
-    handback: function (book) {
+    handback(){
       this.$emit("handback", this.book);
     },
     validateBorrowData() {
+      console.log(this.book.firstName);
       if (buchstabenRegEx.test(this.book.firstName)) {
         this.overlayBorrow = true;
       } else {
-        this.overlayBorrowError = true;
-      }
-
+         this.overlayBorrowError = true;
+       }
     }
   },
 };
