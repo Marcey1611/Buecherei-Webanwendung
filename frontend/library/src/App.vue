@@ -1,3 +1,4 @@
+<!-- Test -->
 <template>
   <div id="app">
     <div>
