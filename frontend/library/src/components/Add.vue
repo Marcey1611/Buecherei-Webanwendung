@@ -1,4 +1,5 @@
 <template>
+
     <h1 id="AddH1">Füge ein neues Buch zur Bibliothek hinzu!</h1>
     <div id="idDivclearAdd">
         <v-icon id="idclearAdd" @click="this.reset()">mdi-close</v-icon>
@@ -25,10 +26,13 @@
             <v-btn type="submit" @click="validate()" id="idButton">Buch hinzufügen</v-btn>
         </v-form>
     </div>
+
 </template>
+
 <script>
+
 import axios from 'axios';
-import tags from 'language-tags';
+
 export default {
     data() {
         return {
@@ -85,7 +89,7 @@ export default {
         getBook() {
             if (this.title != '' && this.author != '' && this.isbn == 0 ) {
                 try {
-                    axios.get('https://www.googleapis.com/books/v1/volumes', { //GoogleBooks Api https://developers.google.com/books/docs/v1/getting_started?csw=1&hl=de
+                    axios.get('https://www.googleapis.com/books/v1/volumes', {
                         params: {
                             q: 'intitle:' + this.title + '+ inauthor:' + this.author,
                             maxResults: 1,
@@ -121,7 +125,7 @@ export default {
             }
         },
         realNewBook(tmpISBN) {
-        return new Promise(function(resolve,reject){    /*Promis https://www.w3schools.com/js/js_promise.asp*/
+        return new Promise(function(resolve,reject){   
             axios.get("http://localhost:8080/books/").then(response => {
                 console.log(response.data)
                     response.data.forEach(element => {
@@ -212,6 +216,7 @@ export default {
     },
 }
 </script>
+
 <style>
 @import "../assets/add.module.css";
 </style>
