@@ -4,8 +4,8 @@
     <!-- Such- und Filterleiste -->
     <div id="SearchFilterBar">
       <div id="SearchField">
-        <v-text-field @clear="handleInput" @input="handleInput" v-model="searchInput" 
-          placeholder="Suche" clearable prepend-icon="mdi-magnify"></v-text-field>
+        <v-text-field @clear="handleInput" @input="handleInput" v-model="searchInput" placeholder="Suche" clearable
+          prepend-icon="mdi-magnify"></v-text-field>
       </div>
       <div id="filterChevronButton">
         <v-icon :icon="showFilterBar ? 'mdi-chevron-up' : 'mdi-chevron-down'"
@@ -15,22 +15,19 @@
     <v-expand-transition>
       <div v-show="showFilterBar" id="filterBar">
         <div id="filterLanguages">
-          <v-autocomplete class="filterLangGenreDropdown" chips @click="getFilterLangValues" 
-            @blur="handleInput" clearable deletable-chips label="Sprache" 
-            v-model="selectedLanguages" :items="languages" multiple 
+          <v-autocomplete class="filterLangGenreDropdown" chips @click="getFilterLangValues" @blur="handleInput" clearable
+            deletable-chips label="Sprache" v-model="selectedLanguages" :items="languages" multiple
             :menu-props="{ maxHeight: 250 }"></v-autocomplete>
         </div>
         <div id="filterGenre">
-          <v-autocomplete v-model="filterGenreValue" label="Genre" :items="genres" 
-            @click="getFilterGenreValues" @blur="handleInput"></v-autocomplete>
+          <v-autocomplete v-model="filterGenreValue" label="Genre" :items="genres" @click="getFilterGenreValues"
+            @blur="handleInput"></v-autocomplete>
         </div>
         <div id="filterYearFrom">
-          <v-text-field type="number" v-model="filterYearValue[0]" @blur="handleInput" 
-            label="Jahr: von "></v-text-field>
+          <v-text-field type="number" v-model="filterYearValue[0]" @blur="handleInput" label="Jahr: von "></v-text-field>
         </div>
         <div id="filterYearTo">
-          <v-text-field type="number" v-model="filterYearValue[1]" @blur="handleInput" 
-            label=" bis "></v-text-field>
+          <v-text-field type="number" v-model="filterYearValue[1]" @blur="handleInput" label=" bis "></v-text-field>
         </div>
         <div id="filterAvailable">
           <v-switch v-model="filterAvailableValue" label="Verfügbar"
@@ -38,9 +35,8 @@
             @change="handleInput"></v-switch>
         </div>
         <div id="filterPages">
-          <v-range-slider @click="handleInput" max="1000" label="Seitenzahl" 
-            color="#616161" track-fill-color="#0E639C" thumb-color="#0E639C" 
-            v-model="filterPagesValue" step="1" thumb-label="always"></v-range-slider>
+          <v-range-slider @click="handleInput" max="1000" label="Seitenzahl" color="#616161" track-fill-color="#0E639C"
+            thumb-color="#0E639C" v-model="filterPagesValue" step="1" thumb-label="always"></v-range-slider>
         </div>
       </div>
     </v-expand-transition>
@@ -56,7 +52,9 @@
 <script>
 import Book from './Book.vue';
 import axios from 'axios';
+
 var date = new Date();
+
 export default {
   components: {
     Book
@@ -88,6 +86,7 @@ export default {
           this.handleInput();
         });
     },
+
     handback: function (e) {
       axios
         .put("http://localhost:8080/books/" + e.id, {
@@ -100,16 +99,19 @@ export default {
           this.handleInput();
         });
     },
+
     getFilterGenreValues: function () {
       axios.get("http://localhost:8080/books/genre").then(response => {
         this.genres = response.data;
       });
     },
+
     getFilterLangValues: function () {
       axios.get("http://localhost:8080/books/language").then(response => {
         this.languages = response.data;
       });
     },
+    
     async handleInput() {
       try {
         const response = await axios.get('http://localhost:8080/books/search', {

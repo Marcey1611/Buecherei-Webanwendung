@@ -121,7 +121,12 @@ app.put("/books/:id", function (req, res) {
         if(!req.body.available){
             dataAsObject[req.params.id].borrowCount++;
         }
-        fsWriteFile(dataAsObject, res);
+        fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
+            res.writeHead(200, {
+                "Content-Type": "application/json",
+            });
+            res.end(JSON.stringify(dataAsObject));
+        });
     });
 });
 
@@ -145,7 +150,12 @@ app.post("/books", function (req, res) {
             owner:req.body.owner,
             borrowCount:0
         });
-        fsWriteFile(dataAsObject, res);
+        fs.writeFile(filename, JSON.stringify(dataAsObject), () => {
+            res.writeHead(200, {
+                "Content-Type": "application/json",
+            });
+            res.end(JSON.stringify(dataAsObject));
+        });
     });
 })
 
@@ -201,13 +211,5 @@ function getGoogleBooks() {
                 console.log('Error');
                 console.log(error);
             });
-    });
-}
-function fsWriteFile(data, res) {
-    fs.writeFile(filename, JSON.stringify(data), () => {
-        res.writeHead(200, {
-            "Content-Type": "application/json",
-        });
-        res.end(JSON.stringify(data));
     });
 }

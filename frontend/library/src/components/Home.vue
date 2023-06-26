@@ -5,14 +5,12 @@
     <div id="top10Books">
         <v-sheet class="mx-auto" width="87vw" height="50vh" color="#2d2d2d">
             <v-slide-group v-model="model" class="pa-4" center-active>
-                <v-slide-group-item v-for="book in this.top10books" :key="book" 
-                    v-slot="{ isSelected, toggle }">
-                    <v-card :color="isSelected ? '#0E639C' : '#828282'" class="ma-4" 
-                        height="350px" width="200px" @click="toggle">
+                <v-slide-group-item v-for="book in this.top10books" :key="book" v-slot="{ isSelected, toggle }">
+                    <v-card :color="isSelected ? '#0E639C' : '#828282'" class="ma-4" height="350px" width="200px"
+                        @click="toggle">
                         <div class="d-flex fill-height align-center justify-center">
                             <v-scale-transition>
-                                <img id="cover" :src="book.img" alt="Werbung" 
-                                    @click="showMoreInfos(book)">
+                                <img id="cover" :src="book.img" alt="Werbung" @click="showMoreInfos(book)">
                             </v-scale-transition>
                         </div>
                     </v-card>
@@ -30,18 +28,18 @@
     <div id="generalInfos">
         <h1>Wie es funktioniert!?</h1>
         <br>
-        <p>Hi, du bist wahrscheinlich neu hier und willt wissen wie "The OnLibrary" 
+        <p>Hi, du bist wahrscheinlich neu hier und willt wissen wie "The OnLibrary"
             funktioniert.</p>
         <br>
-        <p>Das Grundprinzip hinter dieser Website ist eine einfach Bücherei nur moderner 
+        <p>Das Grundprinzip hinter dieser Website ist eine einfach Bücherei nur moderner
             und innovativer. Eigentlich ist es ganz einfach:</p>
         <br>
-        <p>Jeder der möchte kann bei uns, über die Add-Seite, seine Bücher hochladen, um 
-            diese anderen ausleihen zu können. Auf der Books-Seite siehst du alle Bücher 
-            der Community, über die Filter-und Such-Bar kannst du die Liste nach belieben 
-            filtern und durchsuchen. Wenn du ein Buch gefunden hast welches du bei einem 
-            anderen ausleihen möchtest kannst du unterhalb der Buchinfos, falls das Buch 
-            verfügbar ist, dein Name angeben und dich bei seinem Besitzer melden. Viel 
+        <p>Jeder der möchte kann bei uns, über die Add-Seite, seine Bücher hochladen, um
+            diese anderen ausleihen zu können. Auf der Books-Seite siehst du alle Bücher
+            der Community, über die Filter-und Such-Bar kannst du die Liste nach belieben
+            filtern und durchsuchen. Wenn du ein Buch gefunden hast welches du bei einem
+            anderen ausleihen möchtest kannst du unterhalb der Buchinfos, falls das Buch
+            verfügbar ist, dein Name angeben und dich bei seinem Besitzer melden. Viel
             Spaß!</p>
     </div>
     <br>
@@ -68,9 +66,9 @@ export default {
                     firstName: e.firstName,
                     lastName: e.lastName,
                     available: false
-                });window.location.reload();
-                
+                }); window.location.reload();
         },
+
         handback: function (e) {
             axios
                 .put("http://localhost:8080/books/" + e.id, {
@@ -82,10 +80,12 @@ export default {
                     window.location.reload();
                 });
         },
+
         showMoreInfos(book) {
             this.showMoreInfosBool = true;
             this.selectedBook = book;
         },
+
         async getBookCover() {
             const response = await axios.get('http://localhost:8080/books');
             this.books = response.data;
@@ -120,17 +120,14 @@ export default {
     width: 200px;
     height: 350px;
 }
-
 #top10Books {
     background-color: #2d2d2d;
     width: 95%;
     border-radius: 1vh 1vh 1vh 1vh;
 }
-
 #top10BooksSelectedBooks {
     width: 95%;
 }
-
 #generalInfos {
     background-color: #2d2d2d;
     width: 95%;

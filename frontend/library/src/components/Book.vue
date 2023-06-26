@@ -4,7 +4,7 @@
   <div id="book">
     <div id="bookCoverspace">
       <div>
-        <v-chip class="borrowCountChip" color="#ffffff" :style="{ backgroundColor: '#0E639C' }" 
+        <v-chip class="borrowCountChip" color="#ffffff" :style="{ backgroundColor: '#0E639C' }"
           v-tooltip="{ content: text }" @mouseover="showFullText = true" 
           @mouseout="showFullText = false"> {{ showFullText ? text : truncatedText }}
         </v-chip>
@@ -41,37 +41,30 @@
       <h3 id="bookSumTitle">Zusammenfassung: </h3>
       <div id="bookSummary">{{ book.description }}</div>
       <!-- Ausleihen Leiste -->
-      <v-text-field class="bookListBorrowInputFirstName" v-if="book.available" type="text" 
-        label="Vorname" v-model="book.firstName"></v-text-field>
-      <v-text-field class="bookListBorrowInputLastName" v-if="book.available" type="text" 
-        label="Nachname" v-model="book.lastName"></v-text-field>
-      <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData()">
-        Ausleihen</v-btn>
-      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained 
-        class="align-center justify-center">
+      <v-text-field class="bookListBorrowInputFirstName" v-if="book.available" type="text" label="Vorname"
+        v-model="book.firstName"></v-text-field>
+      <v-text-field class="bookListBorrowInputLastName" v-if="book.available" type="text" label="Nachname"
+        v-model="book.lastName"></v-text-field>
+      <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData()">Ausleihen</v-btn>
+      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained class="align-center justify-center">
         <div>
           <v-icon class="overlayBorrowClose" @click="overlayBorrowError = false">mdi-close
           </v-icon>
           <div class="overlayBorrowText">
-            <h3 id="overlayBorrorErrorMessage">Bitte gib eine gültigen Vorname und
-              Nachnamen ein!</h3>
+            <h3 id="overlayBorrorErrorMessage">Bitte gib eine gültigen Vorname und Nachnamen ein!</h3>
           </div>
         </div>
       </v-overlay>
-      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrow" contained 
-        class="align-center justify-center">
+      <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrow" contained class="align-center justify-center">
         <div>
-          <v-icon class="overlayBorrowClose" @click="overlayBorrow = false">mdi-close
-          </v-icon>
+          <v-icon class="overlayBorrowClose" @click="overlayBorrow = false">mdi-close</v-icon>
           <div class="overlayBorrowText">
             <h3>Weiterse Vorgehen:</h3>
             <br>
             <h4>Herzlichen Glückwunsch!</h4>
-            <p>Du hast soeben das Buch {{ book.title }} von {{ book.author }} ausgeliehen.
-              </p>
+            <p>Du hast soeben das Buch {{ book.title }} von {{ book.author }} ausgeliehen.</p>
             <p>Jetzt kannst du dich bei seinem Besitzer {{ book.owner.firstName }}
-              {{ book.owner.lastName }} unter den folgenden Kontaktdaten melden.
-            </p>
+              {{ book.owner.lastName }} unter den folgenden Kontaktdaten melden.</p>
             <br>
             <p>Kontaktdaten:</p>
             <p>Handynummer des Besitzers: {{ book.owner.phoneNumber }}</p>
@@ -85,18 +78,17 @@
           </div>
         </div>
       </v-overlay>
-      <v-btn id="bookListHandBackButton" v-if="!book.available" @click="handback(book)">
-        Zurückgeben</v-btn>
+      <v-btn id="bookListHandBackButton" v-if="!book.available" @click="handback(book)">Zurückgeben</v-btn>
     </div>
   </v-expand-transition>
 </template>
 
 <script>
 var buchstabenRegEx = /^[A-Za-z]+$/;
+
 export default {
   data() {
     return {
-      show: false,
       overlayBorrow: false,
       overlayBorrowError: false,
       showMoreInfos: false,
@@ -105,6 +97,7 @@ export default {
   },
   emits: ['borrow', 'handback'],
   props: ['book'],
+
   computed: {
     text() {
       return this.book.borrowCount + 'x ausgeliehen';
@@ -118,9 +111,11 @@ export default {
       this.overlayBorrow = false;
       this.$emit("borrow", this.book);
     },
+
     handback() {
       this.$emit("handback", this.book);
     },
+    
     validateBorrowData() {
       console.log(this.book.firstName);
       if (buchstabenRegEx.test(this.book.firstName)) {
