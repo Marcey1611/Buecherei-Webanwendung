@@ -1,3 +1,4 @@
+<!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
 <template>
     <!-- Top 10 Bücher Cover -->
     <h1 id="title">Top 10 Bücher</h1>

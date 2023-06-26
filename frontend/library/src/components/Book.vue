@@ -42,9 +42,9 @@
       <div id="bookSummary">{{ book.description }}</div>
       <!-- Ausleihen Leiste -->
       <v-text-field class="bookListBorrowInputFirstName" v-if="book.available" type="text" 
-        placeholder="Vorname" v-model="book.firstName"></v-text-field>
+        label="Vorname" v-model="book.firstName"></v-text-field>
       <v-text-field class="bookListBorrowInputLastName" v-if="book.available" type="text" 
-        placeholder="Nachname" v-model="book.lastName"></v-text-field>
+        label="Nachname" v-model="book.lastName"></v-text-field>
       <v-btn id="bookListBorrowButton" v-if="book.available" @click="validateBorrowData()">
         Ausleihen</v-btn>
       <v-overlay id="overlayBorrowOverlay" v-model="overlayBorrowError" contained 
@@ -134,4 +134,5 @@ export default {
 </script>
 
 <style>
-@import "../assets/book.module.css";</style>
+@import "../assets/book.module.css";
+</style>

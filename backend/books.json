@@ -1,26 +1,5 @@
 [
     {
-        "id": 0,
-        "img": "http://books.google.com/books/content?id=j4c9rgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-        "isbn": 9783423716512,
-        "title": "Throne of Glass - Die Erwählte",
-        "author": "Sarah J. Maas",
-        "releaseYear": 2015,
-        "genre": "Fantasy",
-        "language": "Deutsch",
-        "pages": 512,
-        "available": true,
-        "firstName": "",
-        "lastName": "",
-        "owner": {
-            "firstName": "Jessica",
-            "lastName": "Schneider",
-            "phoneNumber": "+49 123 45678",
-            "eMail": "bsp@email.com"
-        },
-        "borrowCount": 8
-    },
-    {
         "id": 1,
         "isbn": 9780590353403,
         "img": "http://books.google.com/books/content?id=zXgTdQagLGkC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -40,7 +19,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 3
+        "borrowCount": 6
     },
     {
         "id": 2,
@@ -61,7 +40,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 11,
+        "borrowCount": 3,
         "img": "http://books.google.com/books/content?id=ncuX8p2xLIUC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
     },
     {
@@ -105,7 +84,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 10,
+        "borrowCount": 4,
         "img": "http://books.google.com/books/content?id=z47vnQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
     },
     {
@@ -127,7 +106,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 2,
+        "borrowCount": 7,
         "img": "http://books.google.com/books/content?id=6rdPEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
     },
     {
@@ -143,7 +122,7 @@
         "description": "To make the journey into THE POWER OF NOW we will need to leave our analytical mind and its false created self, the ego, behind. Although the journey is challenging, Eckhart Tolle offers simple language and a question and answer format to guide us. Surrender to the present moment, where problems do not exist. It is here we find our joy, are able to embrace our true selves and discover that we are already complete and perfect. If we are able to be fully present and take each step in the 'now' we will be opening ourselves to the transforming experience of THE POWER OF NOW. It's a book to be revisited again and again. Already a word-of-mouth bestseller in Canada, this is one of those rare books that has the power to change readers' lives for the better.",
         "firstName": "",
         "lastName": "",
-        "borrowCount": 10,
+        "borrowCount": 3,
         "owner": {
             "firstName": "Marcel",
             "lastName": "Eichelberger",
@@ -165,7 +144,7 @@
         "description": "In a future North America, where the rulers of Panem maintain control through an annual televised survival competition pitting young people from each of the twelve districts against one another, sixteen-year-old Katniss's skills are put to the test when she voluntarily takes her younger sister's place.",
         "firstName": "",
         "lastName": "",
-        "borrowCount": 3,
+        "borrowCount": 12,
         "owner": {
             "firstName": "Mike",
             "lastName": "Lachmmuth",
@@ -191,6 +170,26 @@
             "lastName": "Eichelberger",
             "phoneNumber": "01761234567",
             "eMail": "bsp@email.com"
+        },
+        "borrowCount": 3
+    },
+    {
+        "id": 9,
+        "img": "http://books.google.com/books/content?id=tTCWmwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        "isbn": 9783730600009,
+        "title": "Der Große Gatsby / The Great Gatsby",
+        "author": "Francis Scott Fitzgerald",
+        "releaseYear": 2013,
+        "genre": "Jazz Age",
+        "language": "Deutsch",
+        "pages": 431,
+        "available": true,
+        "description": "Hier könnte eine Beschreibung stehen!",
+        "owner": {
+            "firstName": "Test",
+            "lastName": "test",
+            "phoneNumber": "12345678",
+            "eMail": "test@email.com"
         },
         "borrowCount": 0
     }

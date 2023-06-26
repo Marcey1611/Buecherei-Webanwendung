@@ -1,9 +1,10 @@
+<!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
 <template>
 
     <h1 id="AddH1">Füge ein neues Buch zur Bibliothek hinzu!</h1>
     <div id="idDivclearAdd">
         <v-icon id="idclearAdd" @click="this.reset()">mdi-close</v-icon>
-        <p id="kleinerTippAddSeite">Kleiner Tipp, wenn du den genauen Titel und Autor deines Buches kennst können wir den Rest autovervollständigen.</p>
+        <p id="kleinerTippAddSeite">Kleiner Tipp, wenn du den genauen Titel und Autor deines Buches kennst können wir den Rest teilweise oder ganz autovervollständigen.</p>
         <v-form id="Add" ref="addForm">
             <div id="idBuch">
                 
@@ -14,7 +15,7 @@
             <v-text-field v-model="this.author" label="Author" @blur="getBook()" id="AddAuthor" :rules="[v=>!!v|| 'Autor ist ein Pflichtfeld']" type="text" required></v-text-field>
             <v-text-field v-model="this.genre" label="Genre" id="Genre" :rules="[v=>!!v|| 'Genre ist ein Pflichtfeld']" type="text"  required></v-text-field>
             <v-text-field v-model="this.language" label="Sprache" @blur="this.resolveAbbreviation()" id="Sprache" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="text"  required></v-text-field>
-            <v-text-field v-model="this.isbn" label="IBN" @blur="getCoverByISBN()" id="ISBN" :rules="[v=>!!v|| 'ISBN ist ein Pflichtfeld']" type="number" min="0" step="1" required></v-text-field>
+            <v-text-field v-model="this.isbn" label="ISBN" @blur="getCoverByISBN()" id="ISBN" :rules="[v=>!!v|| 'ISBN ist ein Pflichtfeld']" type="number" min="0" step="1" required></v-text-field>
             <v-text-field v-model="this.releaseYear" label="Erscheinungsjahr" id="Erscheinungsjahr" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="number" min="0" step="1" required></v-text-field>
             <v-textarea v-model="this.description" label="Beschreibung" id="Beschreibung" :rules="[v=>!!v|| 'Beschreibung ist ein Pflichtfeld']" type="text"  required></v-textarea>
         <v-text-field v-model="this.pages" label="Seitenzahl" id="Seitenzahl" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="number" min="0" step="1" ></v-text-field>

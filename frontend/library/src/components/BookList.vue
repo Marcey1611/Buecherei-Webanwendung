@@ -1,3 +1,4 @@
+<!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
 <template>
   <div id="BookList">
     <!-- Such- und Filterleiste -->
