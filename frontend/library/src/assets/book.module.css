@@ -186,6 +186,7 @@
     grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 5;
+    margin-top: 3vh;
     height: 6vh;
     background-color: #0E639C;
     color: white;
