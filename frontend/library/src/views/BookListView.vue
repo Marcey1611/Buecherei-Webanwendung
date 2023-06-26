@@ -1,20 +1,15 @@
 <template>
-    <main> 
-      <BookList/>
-    </main>
-  </template>
+  <main>
+    <BookList />
+  </main>
+</template>
   
-  <script>
-  import BookList from '../components/BookList.vue';
-  
-  export default {
-    components: {
-      BookList
-    }
-  };
-  </script>
-  
-  <style>
-  
+<script>
+import BookList from '../components/BookList.vue';
 
-  </style>
+export default {
+  components: {
+    BookList
+  }
+};
+</script>
