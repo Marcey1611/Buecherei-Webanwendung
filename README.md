@@ -27,7 +27,8 @@ Promise https://www.w3schools.com/js/js_promise.asp
 ChatGPT
 StackOverflow
 Vuetify https://vuetifyjs.com/en/
-"html Komponenten"  
+"html Komponenten" 
+web-forward https://web-forward.de/2020/06/tutorial-dive-into-vue-node-rest/ 
 
 
 Hinweise:
