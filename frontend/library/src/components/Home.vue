@@ -67,10 +67,8 @@ export default {
                     firstName: e.firstName,
                     lastName: e.lastName,
                     available: false
-                })
-                .then(response => {
-                    window.location.reload();
-                });
+                });window.location.reload();
+                
         },
         handback: function (e) {
             axios

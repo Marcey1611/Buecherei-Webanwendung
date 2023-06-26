@@ -3,8 +3,10 @@
     <h1 id="AddH1">Füge ein neues Buch zur Bibliothek hinzu!</h1>
     <div id="idDivclearAdd">
         <v-icon id="idclearAdd" @click="this.reset()">mdi-close</v-icon>
+        <p id="kleinerTippAddSeite">Kleiner Tipp, wenn du den genauen Titel und Autor deines Buches kennst können wir den Rest autovervollständigen.</p>
         <v-form id="Add" ref="addForm">
             <div id="idBuch">
+                
                 <v-text-field v-model="this.title" label="Titel" @blur="getBook()" id="AddTitle" :rules="[v=>!!v|| 'Title ist ein Pflichtfeld']" type="text" required></v-text-field>
             <div id="idImgDiv">
                 <img :src="this.cover" id="idImg">

@@ -9,16 +9,16 @@
         "genre": "Fantasy",
         "language": "Deutsch",
         "pages": 512,
-        "available": false,
-        "firstName": "Marcel",
-        "lastName": "Eichelberger",
+        "available": true,
+        "firstName": "",
+        "lastName": "",
         "owner": {
             "firstName": "Jessica",
             "lastName": "Schneider",
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 6
+        "borrowCount": 8
     },
     {
         "id": 1,
@@ -40,7 +40,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 7
+        "borrowCount": 3
     },
     {
         "id": 2,
@@ -61,7 +61,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 9,
+        "borrowCount": 11,
         "img": "http://books.google.com/books/content?id=ncuX8p2xLIUC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
     },
     {
@@ -84,7 +84,7 @@
             "eMail": "bsp@email.com"
         },
         "borrowCount": 5,
-        "img": "http://books.google.com/books/content?id=iQDWg8mBz-0C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        "img": "https://covers.openlibrary.org/b/isbn/9780316769174-L.jpg"
     },
     {
         "id": 4,
@@ -105,7 +105,7 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 6,
+        "borrowCount": 10,
         "img": "http://books.google.com/books/content?id=z47vnQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
     },
     {
@@ -127,8 +127,8 @@
             "phoneNumber": "+49 123 45678",
             "eMail": "bsp@email.com"
         },
-        "borrowCount": 8,
-        "img": "http://books.google.com/books/content?id=2nyNEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        "borrowCount": 2,
+        "img": "http://books.google.com/books/content?id=6rdPEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
     },
     {
         "id": 6,
@@ -143,7 +143,7 @@
         "description": "To make the journey into THE POWER OF NOW we will need to leave our analytical mind and its false created self, the ego, behind. Although the journey is challenging, Eckhart Tolle offers simple language and a question and answer format to guide us. Surrender to the present moment, where problems do not exist. It is here we find our joy, are able to embrace our true selves and discover that we are already complete and perfect. If we are able to be fully present and take each step in the 'now' we will be opening ourselves to the transforming experience of THE POWER OF NOW. It's a book to be revisited again and again. Already a word-of-mouth bestseller in Canada, this is one of those rare books that has the power to change readers' lives for the better.",
         "firstName": "",
         "lastName": "",
-        "borrowCount": 4,
+        "borrowCount": 10,
         "owner": {
             "firstName": "Marcel",
             "lastName": "Eichelberger",
@@ -165,7 +165,7 @@
         "description": "In a future North America, where the rulers of Panem maintain control through an annual televised survival competition pitting young people from each of the twelve districts against one another, sixteen-year-old Katniss's skills are put to the test when she voluntarily takes her younger sister's place.",
         "firstName": "",
         "lastName": "",
-        "borrowCount": 1,
+        "borrowCount": 3,
         "owner": {
             "firstName": "Mike",
             "lastName": "Lachmmuth",
@@ -173,5 +173,25 @@
             "eMail": "bsp@email.com"
         },
         "img": "http://books.google.com/books/content?id=sJdUAzLUNyAC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    {
+        "id": 8,
+        "img": "http://books.google.com/books/content?id=uC05DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        "isbn": 9783641225957,
+        "title": "Die geheime Geschichte",
+        "author": "Donna Tartt",
+        "releaseYear": 2017,
+        "genre": "Fiction",
+        "language": "Deutsch",
+        "pages": 618,
+        "available": true,
+        "description": "Richard Papen stammt aus einfachen Verhältnissen. Als er aufgrund eines Stipendiums das College besuchen kann, ist er gleich fasziniert von der ihm fremden Welt. Besonders zieht ihn eine Gruppe junger Studenten in den Bann, mit denen er nicht nur Griechisch lernt, sondern auch ausgelassen feiert. Doch bald spürt er, dass unter der Oberfläche unerschütterlicher Freundschaft Spannungen lauern und dass ein furchtbares Geheimnis seine Freunde belastet – ein Geheimnis, das auch ihn mehr und mehr in seinen dunklen, mörderischen Sog zieht.",
+        "owner": {
+            "firstName": "Marcel",
+            "lastName": "Eichelberger",
+            "phoneNumber": "01761234567",
+            "eMail": "bsp@email.com"
+        },
+        "borrowCount": 0
     }
 ]
