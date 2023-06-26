@@ -65,9 +65,6 @@ export default {
                 phoneNumber: '',
                 eMail: ''
             },
-            errorLable: '',
-            errorShow: '',
-            showUpload: true,
             nopic: ''
         };
     },
@@ -162,7 +159,6 @@ export default {
                     console.log(response);
                     this.language = response;
                 }).catch(() => {
-                    this.language = tags.language(this.language);
                 })
             }
         },
@@ -171,11 +167,9 @@ export default {
             if (this.isbn != '' && this.cover == this.nopic) {
                 try {
                     this.cover = 'https://covers.openlibrary.org/b/isbn/' + this.isbn + '-L.jpg'
-                    this.showUpload = false
                 } catch (error) { console.log('Error while downloading img') }
             } if (this.isbn == '' && this.cover != this.nopic) {
                 this.cover = this.nopic
-                this.showUpload = true
             }
         },
 

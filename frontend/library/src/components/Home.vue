@@ -3,8 +3,8 @@
     <!-- Top 10 Bücher Cover -->
     <h1 id="title">Top 10 Bücher</h1>
     <div id="top10Books">
-        <v-sheet class="mx-auto" width="87vw" height="50vh" color="#2d2d2d">
-            <v-slide-group v-model="model" class="pa-4" center-active>
+        <v-sheet class="mx-auto" width="87vw" height="auto" color="#2d2d2d">
+            <v-slide-group v-model="model" class="pa-5" center-active>
                 <v-slide-group-item v-for="book in this.top10books" :key="book" v-slot="{ isSelected, toggle }">
                     <v-card :color="isSelected ? '#0E639C' : '#828282'" class="ma-4" height="350px" width="200px"
                         @click="toggle">

@@ -3,7 +3,6 @@
     margin-bottom: 3vh;
     width: 95%;
 }
-
 #SearchFilterBar {
     padding-top: 1vh;
     padding-left: 1vw;
@@ -15,14 +14,12 @@
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 1vh 1vh 0vh 0vh;
 }
-
 #SearchField {
     padding-top: 1vh;
     padding-right: 1vw;
     width: 100%;
     color: white;
 }
-
 #filterChevronButton {
     grid-column-start: 2;
     grid-column-end: 3;
@@ -34,15 +31,12 @@
     text-align: center;
     color: #828282;
 }
-
 #filterChevronButton:hover {
     color: white;
 }
-
 #filterChevronButton:active {
     color: #0E639C;
 }
-
 #filterBar {
     width: 95%;
     background-color: #2d2d2d;
@@ -55,42 +49,36 @@
     color: white;
     border-radius: 0vh 0vh 1vh 1vh;
 }
-
 #filterLanguages {
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
 }
-
 #filterGenre {
     grid-column-start: 6;
     grid-column-end: 10;
     grid-row-start: 1;
     grid-row-end: 2;
 }
-
 #filterAvailable {
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
 #filterYearFrom {
     grid-column-start: 5;
     grid-column-end: 7;
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
 #filterYearTo {
     grid-column-start: 8;
     grid-column-end: 10;
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
 #filterPages {
     margin-top: 1vh;
     grid-column-start: 1;
@@ -98,11 +86,9 @@
     grid-row-start: 3;
     grid-row-end: 4;
 }
-
 .switch-on {
     color: #0E639C;
 }
-
 .switch-off {
     color: #a6a6a6;
 }
@@ -111,7 +97,6 @@
 .fade-leave-active {
     transition: opacity 0.5s;
 }
-
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
