@@ -3,8 +3,11 @@
     <!-- Top 10 Bücher Cover -->
     <div id="idHeader">
         <h1 id="title">Top 10 Bücher</h1>
-        <label id="idErrorLable">Server nicht erreichbar</label>
-        <v-icon id="idConnection"  v-show="this.serverError">mdi-server-network-off</v-icon>
+        <div id="idErrorMessage">
+            <label id="idErrorLable">Server nicht erreichbar Funktionen der Webseite sind eingeschränkt</label>
+             <v-icon id="idConnection"  v-show="this.serverError">mdi-server-network-off</v-icon>
+        </div>
+        
         
         
     </div>
@@ -149,27 +152,28 @@ export default {
     text-align: center;
     margin-bottom: 100px;
 }
+#idErrorMessage{
+    color:#C0321E;
+    animation: blinking-animation 1s infinite;
+}
 #idConnection{
     position:  absolute;
     right: 5%;
-    color:#C0321E;
     font-size: 5vh;
-    animation: blinking-animation 1s infinite;
-    grid-column: 3;
+    grid-column: 2;
 }
 #title{
     width: 95%;
 }
 #idHeader{
     display: grid;
-    grid-template-columns: 75fr 20fr 5fr;
+    grid-template-columns: 45fr 55fr;
     position: relative;
     align-items: center;
     width:87vw;
 }
 #idErrorLable{
     color:#C0321E;
-    animation: blinking-animation 1s infinite;
 }
 @keyframes blinking-animation {
     0% {
