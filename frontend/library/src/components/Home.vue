@@ -155,10 +155,13 @@ export default {
 #idErrorMessage{
     color:#C0321E;
     animation: blinking-animation 1s infinite;
+    display: relative;
+    max-width: 100%;
 }
 #idConnection{
     position:  absolute;
-    right: 5%;
+    padding-bottom: 2vh;
+    right: 4%;
     font-size: 5vh;
     grid-column: 2;
 }
@@ -168,7 +171,6 @@ export default {
 #idHeader{
     display: grid;
     grid-template-columns: 45fr 55fr;
-    position: relative;
     align-items: center;
     width:87vw;
 }
