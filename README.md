@@ -30,6 +30,8 @@ Vuetify https://vuetifyjs.com/en/
 "html Komponenten" 
 web-forward https://web-forward.de/2020/06/tutorial-dive-into-vue-node-rest/ 
 
+Deployment: 
+Link(Frontend): https://grafoproject.vercel.app/ 
 
 Hinweise:
 Den Vorhandenen Büchern wird beum start des Servers einen zufälligen BorrowCount(Anzahl wie oft ausgeleiehen) zugeteilt.
