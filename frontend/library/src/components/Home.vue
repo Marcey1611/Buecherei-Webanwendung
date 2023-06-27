@@ -3,9 +3,9 @@
     <!-- Top 10 Bücher Cover -->
     <div id="idHeader">
         <h1 id="title">Top 10 Bücher</h1>
-        <div id="idErrorMessage">
+        <div id="idErrorMessage" v-show="this.serverError">
             <label id="idErrorLable">Server nicht erreichbar Funktionen der Webseite sind eingeschränkt</label>
-             <v-icon id="idConnection"  v-show="this.serverError">mdi-server-network-off</v-icon>
+             <v-icon id="idConnection"  >mdi-server-network-off</v-icon>
         </div>
         
         
