@@ -1,7 +1,13 @@
 <!--$4&AaLk#3@jG6y]xW~2mBd[0Cn^vZp(l1N`9O)bTfV}I?XrU{5]!Qq7eY+K;:S]8Dh,c.Mi<Ft*Rg>zHsE/-->
 <template>
     <!-- Top 10 Bücher Cover -->
-    <h1 id="title">Top 10 Bücher</h1>
+    <div id="idHeader">
+        <h1 id="title">Top 10 Bücher</h1>
+        <label id="idErrorLable">Server nicht erreichbar</label>
+        <v-icon id="idConnection"  v-show="this.serverError">mdi-server-network-off</v-icon>
+        
+        
+    </div>
     <div id="top10Books">
         <v-sheet class="mx-auto" width="87vw" height="auto" color="#2d2d2d">
             <v-slide-group v-model="model" class="pa-5" center-active>
@@ -57,7 +63,8 @@ export default {
         selectedBook: null,
         showMoreInfosBool: false,
         books: [],
-        top10books: []
+        top10books: [],
+        serverError: false
     }),
     methods: {
         borrow: function (e) {
@@ -87,7 +94,10 @@ export default {
         },
 
         async getBookCover() {
-            const response = await axios.get('http://localhost:8080/books');
+            const response = await axios.get('http://localhost:8080/books').catch(err=>{
+                console.log(err)
+                this.serverError = true;
+            });
             this.books = response.data;
             let length = this.books.length;
             let pos = 0;
@@ -139,4 +149,37 @@ export default {
     text-align: center;
     margin-bottom: 100px;
 }
+#idConnection{
+    position:  absolute;
+    right: 5%;
+    color:#C0321E;
+    font-size: 5vh;
+    animation: blinking-animation 1s infinite;
+    grid-column: 3;
+}
+#title{
+    width: 95%;
+}
+#idHeader{
+    display: grid;
+    grid-template-columns: 75fr 20fr 5fr;
+    position: relative;
+    align-items: center;
+    width:87vw;
+}
+#idErrorLable{
+    color:#C0321E;
+    animation: blinking-animation 1s infinite;
+}
+@keyframes blinking-animation {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 </style>
