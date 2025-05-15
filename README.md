@@ -1,3 +1,5 @@
+### Erarbeitet im Rahmen des Hochschulkurses Grafische Bedienoberflächen an der RWU (SoSe 2023)
+
 # Project
 
 Gruppen-Mitglieder:
